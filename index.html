@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Николай & Анастасия — 19.09.2026</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ========================================
+       HEADER
+  ======================================== -->
+  <header id="main-header">
+    <nav class="header-nav">
+      <!-- Левые ссылки -->
+      <div class="nav-group nav-group-left">
+        <a href="#address"   class="nav-link">Адрес</a>
+        <a href="#dresscode" class="nav-link">Дресс-код</a>
+      </div>
+
+      <!-- Логотип по центру -->
+      <div class="header-logo-wrap" id="header-logo-wrap">
+        <a href="#hero">
+          <img src="logo.svg" alt="Николай & Анастасия" class="header-logo" id="header-logo"/>
+        </a>
+      </div>
+
+      <!-- Правые ссылки -->
+      <div class="nav-group nav-group-right">
+        <a href="#wishes" class="nav-link">Пожелания</a>
+        <a href="#form"   class="nav-link">Анкета</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ========================================
+       HERO
+  ======================================== -->
+  <section id="hero">
+
+    <!-- Фон -->
+    <div class="hero-bg">
+      <img src="images/hero-bg.jpg" alt="" class="hero-bg-img"/>
+      <div class="hero-overlay"></div>
+    </div>
+
+    <!-- Большое белое лого -->
+    <div class="hero-logo-wrap">
+      <img src="logo.svg" alt="Николай & Анастасия" class="hero-logo"/>
+    </div>
+
+    <!-- 
+      ОБЁРТКА: decoration (фон) + couple-photo (перед)
+      decoration абсолютно позиционирован ВНУТРИ этой обёртки
+    -->
+    <div class="hero-photo-group">
+
+      <!-- Сменяющийся PNG — за фото (z-index ниже) -->
+      <div class="decoration-wrap">
+        <img src="images/decoration-1.png" alt="" class="decoration-img" id="decoration-img"/>
+      </div>
+
+      <!-- Фото пары — на переднем плане -->
+      <div class="photo-3d-container" id="photo3d">
+        <img src="images/couple-photo.jpg" alt="Николай и Анастасия" class="photo-3d"/>
+      </div>
+
+    </div>
+
+    <!-- Текст приглашения -->
+    <div class="hero-text">
+      <p>
+        Приглашают Вас на свою свадьбу,<br/>
+        которая состоится <strong>19 сентября 2026 года в 15:30</strong><br/>
+        по адресу <a href="#address" class="hero-address-link">Набережная реки Фонтанки, 118</a>
+      </p>
+    </div>
+
+  </section>
+
+  <!-- ========================================
+       АДРЕС
+  ======================================== -->
+  <section id="address">
+    <h2 class="section-title-display">АДРЕС</h2>
+    <div class="map-container">
+      <iframe
+        src="https://yandex.ru/map-widget/v1/?ll=30.306531%2C59.915136&z=16&pt=30.306531,59.915136,pm2rdm&text=%D0%9D%D0%B0%D0%B1%D0%B5%D1%80%D0%B5%D0%B6%D0%BD%D0%B0%D1%8F+%D1%80%D0%B5%D0%BA%D0%B8+%D0%A4%D0%BE%D0%BD%D1%82%D0%B0%D0%BD%D0%BA%D0%B8+118"
+        width="100%"
+        height="500"
+        frameborder="0"
+        allowfullscreen="true"
+      ></iframe>
+    </div>
+  </section>
+
+  <!-- ========================================
+       ДРЕСС-КОД
+  ======================================== -->
+  <section id="dresscode">
+    <h2 class="section-title-display">ДРЕСС-КОД</h2>
+    <div class="dresscode-layout">
+      <div class="dresscode-left">
+        <img src="images/dresscode-left.jpg" alt="Дресс-код" class="dresscode-static-img"/>
+      </div>
+      <div class="dresscode-right">
+        <div class="carousel" id="carousel">
+          <div class="carousel-track" id="carousel-track">
+            <div class="carousel-slide"><img src="images/dresscode-1.jpg" alt="Образ 1"/></div>
+            <div class="carousel-slide"><img src="images/dresscode-2.jpg" alt="Образ 2"/></div>
+            <div class="carousel-slide"><img src="images/dresscode-3.jpg" alt="Образ 3"/></div>
+            <div class="carousel-slide"><img src="images/dresscode-4.jpg" alt="Образ 4"/></div>
+            <div class="carousel-slide"><img src="images/dresscode-5.jpg" alt="Образ 5"/></div>
+          </div>
+          <button class="carousel-btn carousel-btn-prev" id="carousel-prev" aria-label="Назад">&#8592;</button>
+          <button class="carousel-btn carousel-btn-next" id="carousel-next" aria-label="Вперёд">&#8594;</button>
+          <div class="carousel-dots" id="carousel-dots"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Лайтбокс -->
+  <div class="lightbox-overlay" id="lightbox-overlay"></div>
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightbox-close">&times;</button>
+    <button class="lightbox-btn lightbox-prev" id="lightbox-prev">&#8592;</button>
+    <div class="lightbox-img-wrap">
+      <img src="" alt="" class="lightbox-main-img" id="lightbox-main-img"/>
+    </div>
+    <button class="lightbox-btn lightbox-next" id="lightbox-next">&#8594;</button>
+    <div class="lightbox-thumbnails" id="lightbox-thumbnails"></div>
+  </div>
+
+  <!-- ========================================
+       ПОЖЕЛАНИЯ
+  ======================================== -->
+  <section id="wishes">
+    <h2 class="section-title-display">ПОЖЕЛАНИЯ</h2>
+    <div class="wishes-content">
+      <p class="wishes-text">Здесь будет находиться текст про цветы</p>
+      <div class="wishes-flowers-wrap">
+        <img src="images/flowers.png" alt="Цветы" class="wishes-flowers"/>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       АНКЕТА
+  ======================================== -->
+  <section id="form">
+    <h2 class="section-title-display">АНКЕТА</h2>
+    <form class="survey-form" id="survey-form" novalidate>
+
+      <div class="form-field">
+        <input
+          type="text"
+          id="full-name"
+          name="fullName"
+          placeholder="Имя Фамилия"
+          class="form-input"
+          autocomplete="name"
+        />
+      </div>
+
+      <div class="form-field">
+        <p class="form-question">Сможете ли вы прийти?</p>
+        <div class="form-radio-group">
+          <label class="form-radio-label">
+            <input type="radio" name="attendance" value="yes" class="form-radio"/>
+            <span class="form-radio-custom"></span>
+            Да, смогу
+          </label>
+          <label class="form-radio-label">
+            <input type="radio" name="attendance" value="no" class="form-radio"/>
+            <span class="form-radio-custom"></span>
+            К сожалению, нет
+          </label>
+        </div>
+      </div>
+
+      <button type="submit" class="form-submit-btn" id="submit-btn">
+        Отправить
+      </button>
+
+      <div class="form-message form-success" id="form-success">
+        ✓ Спасибо! Ваш ответ получен.
+      </div>
+      <div class="form-message form-error" id="form-error">
+        Произошла ошибка. Пожалуйста, попробуйте ещё раз.
+      </div>
+
+    </form>
+  </section>
+
+  <!-- ========================================
+       ТАЙМЕР — после анкеты ✅
+  ======================================== -->
+  <section id="timer">
+    <h2 class="section-title-serif">До начала торжества<br/>осталось:</h2>
+    <div class="timer-blocks" id="timer-display">
+      <div class="timer-block">
+        <span class="timer-num" id="t-days">000</span>
+        <span class="timer-label">дней</span>
+      </div>
+      <div class="timer-sep">:</div>
+      <div class="timer-block">
+        <span class="timer-num" id="t-hours">00</span>
+        <span class="timer-label">часов</span>
+      </div>
+      <div class="timer-sep">:</div>
+      <div class="timer-block">
+        <span class="timer-num" id="t-minutes">00</span>
+        <span class="timer-label">минут</span>
+      </div>
+      <div class="timer-sep">:</div>
+      <div class="timer-block">
+        <span class="timer-num" id="t-seconds">00</span>
+        <span class="timer-label">секунд</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       FOOTER
+  ======================================== -->
+  <footer class="site-footer">
+    <p>Николай &amp; Анастасия · 19.09.2026</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
