@@ -943,13 +943,17 @@ a {
   }
 
   /* Дресс-код */
-  .dresscode-left { height: 300px; }
-  .dresscode-right { 
-    height: auto; 
+  .dresscode-left { 
+    height: 460px; /* Consistent with carousel height on mobile */
     padding: 20px 10px;
   }
   
-  .carousel { height: 460px; } /* Чуть меньше высота для мобильных */
+  .dresscode-right { 
+    height: 460px; /* Consistent with carousel height on mobile */
+    padding: 20px 10px;
+  }
+  
+  .carousel { height: 460px; }
 
   /* Карта */
   .map-container { height: 360px; }
