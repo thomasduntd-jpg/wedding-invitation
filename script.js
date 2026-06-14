@@ -286,6 +286,23 @@ document.addEventListener('DOMContentLoaded', function () {
       if (!fullName) {
         nameInput.style.borderBottomColor = '#c0392b';
         nameInput.focus();
+        nameInput.addEventListener('input', function () {
+          nameInput.style.borderBottomColor = '';
+        }, { once: true });
+        return;
+      }
+
+      /* Валидация: Минимум два слова (Имя и Фамилия) */
+      var nameParts = fullName.split(/\s+/).filter(function(word) { 
+        return word.length > 0; 
+      });
+      if (nameParts.length < 2) {
+        alert('Введены неполные значения');
+        nameInput.style.borderBottomColor = '#c0392b';
+        nameInput.focus();
+        nameInput.addEventListener('input', function () {
+          nameInput.style.borderBottomColor = '';
+        }, { once: true });
         return;
       }
 
@@ -344,12 +361,6 @@ document.addEventListener('DOMContentLoaded', function () {
         if (formError) formError.classList.add('visible');
       });
 
-      /* Сброс красной подсветки при вводе */
-      if (nameInput) {
-        nameInput.addEventListener('input', function () {
-          nameInput.style.borderBottomColor = '';
-        }, { once: true });
-      }
     });
   }
 
