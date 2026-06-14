@@ -361,13 +361,18 @@ a {
 .dresscode-right {
   flex: 0 0 50%;
   position: relative;
-  overflow: hidden;
-  background: #e8e8e8;
+  background: #f4f4f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
 }
 
 .carousel {
-  position: absolute;
-  inset: 0;
+  width: 100%;
+  max-width: 400px; /* Фиксированная ширина */
+  height: 580px;    /* Фиксированная высота */
+  position: relative;
   overflow: hidden;
   touch-action: pan-y;
 }
@@ -380,16 +385,16 @@ a {
 }
 
 .carousel-slide {
-  min-width: 100%;
+  flex: 0 0 100%;   /* Слайд всегда равен 100% ширины карусели */
+  width: 100%;
   height: 100%;
   cursor: zoom-in;
-  flex-shrink: 0;
 }
 
 .carousel-slide img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain; /* Фото подстраивается под высоту без искажений */
   pointer-events: none;
   display: block;
 }
@@ -938,8 +943,13 @@ a {
   }
 
   /* Дресс-код */
-  .dresscode-left  { height: 300px; }
-  .dresscode-right { height: 300px; }
+  .dresscode-left { height: 300px; }
+  .dresscode-right { 
+    height: auto; 
+    padding: 20px 10px;
+  }
+  
+  .carousel { height: 460px; } /* Чуть меньше высота для мобильных */
 
   /* Карта */
   .map-container { height: 360px; }
