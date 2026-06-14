@@ -307,7 +307,7 @@ document.addEventListener('DOMContentLoaded', function () {
      7. ФОРМА — Google Sheets
      Вставь свою ссылку из Apps Script в FORM_URL
   ---------------------------------------------------------- */
-  var FORM_URL    = 'https://script.google.com/macros/s/ВСТАВЬ_СВОЮ_ССЫЛКУ/exec';
+  var FORM_URL    = 'https://script.google.com/macros/s/AKfycbyQS5rFdcrYluFvf-y7AWzJY2kKq7yKE8Llr4UjD0g6kkCf7SWHMayP4G2pLisumxAn/exec';
 
   var surveyForm  = document.getElementById('survey-form');
   var submitBtn   = document.getElementById('submit-btn');
