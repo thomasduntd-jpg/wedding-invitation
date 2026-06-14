@@ -380,6 +380,11 @@ a {
   gap: 15px;
   padding: 0 40px;
   align-self: center;
+  grid-template-columns: repeat(2, 60px);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 0;
+  padding: 0;
+  align-self: stretch;
   flex-shrink: 0;
 }
 
@@ -388,6 +393,8 @@ a {
   height: 100%;
   border-radius: 50%;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .carousel {
@@ -975,10 +982,18 @@ a {
   }
 
   .dresscode-palette {
+    order: -1;
     grid-template-columns: repeat(4, 50px);
     grid-template-rows: repeat(2, 50px);
+    gap: 15px;
     padding: 0;
     justify-content: center;
+    align-self: center;
+  }
+
+  .palette-item {
+    border-radius: 50%;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
   }
   
   .carousel { height: 460px; }
