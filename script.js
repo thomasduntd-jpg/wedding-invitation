@@ -340,20 +340,30 @@ document.addEventListener('DOMContentLoaded', function () {
       }
 
       /* Загрузка */
-      submitBtn.classList.add('loading');
-      submitBtn.textContent = 'Отправляем...';
+      if (submitBtn) {
+        submitBtn.classList.add('loading');
+        submitBtn.textContent = 'Отправляем...';
+        submitBtn.disabled = true;
+      }
       if (formSuccess) formSuccess.classList.remove('visible');
       if (formError)   formError.classList.remove('visible');
 
+      /* Отправляем как FormData (без заголовков) → без префлайта */
+      var fd = new FormData();
+      fd.append('fullName', fullName);
+      fd.append('attendance', attendance.value);
+
       fetch(FORM_URL, {
-        method:  'POST',
-        mode:    'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify({ fullName: fullName, attendance: attendance.value })
+        method: 'POST',
+        mode: 'no-cors',
+        body: fd
       })
       .then(function () {
-        submitBtn.classList.remove('loading');
-        submitBtn.textContent = 'Отправить';
+        if (submitBtn) {
+          submitBtn.classList.remove('loading');
+          submitBtn.textContent = 'Отправить';
+          submitBtn.disabled = false;
+        }
         if (formSuccess) formSuccess.classList.add('visible');
 
         /* Сброс формы */
@@ -367,19 +377,21 @@ document.addEventListener('DOMContentLoaded', function () {
       })
       .catch(function (err) {
         console.error('Ошибка:', err);
-        submitBtn.classList.remove('loading');
-        submitBtn.textContent = 'Отправить';
+        if (submitBtn) {
+          submitBtn.classList.remove('loading');
+          submitBtn.textContent = 'Отправить';
+          submitBtn.disabled = false;
+        }
         if (formError) formError.classList.add('visible');
       });
-    });
 
-    /* Сброс красной подсветки при вводе */
-    var nameInput = document.getElementById('full-name');
-    if (nameInput) {
-      nameInput.addEventListener('input', function () {
-        nameInput.style.borderBottomColor = '';
-      });
-    }
+      /* Сброс красной подсветки при вводе */
+      if (nameInput) {
+        nameInput.addEventListener('input', function () {
+          nameInput.style.borderBottomColor = '';
+        }, { once: true });
+      }
+    });
   }
 
 }); /* конец DOMContentLoaded */
