@@ -189,11 +189,11 @@ document.addEventListener('DOMContentLoaded', function () {
     let touchStartX = 0;
 
     carouselTrack.addEventListener('touchstart', function (e) {
-      touchStartX = e.changedTouches[0].screenX;
+      touchStartX = e.changedTouches[0].clientX;
     }, { passive: true });
 
     carouselTrack.addEventListener('touchend', function (e) {
-      const diff = touchStartX - e.changedTouches[0].screenX;
+      const diff = touchStartX - e.changedTouches[0].clientX;
       if (Math.abs(diff) > 40) {
         goToSlide(diff > 0 ? currentSlide + 1 : currentSlide - 1);
       }
@@ -292,10 +292,10 @@ document.addEventListener('DOMContentLoaded', function () {
   if (lightbox) {
     let lbTouchStart = 0;
     lightbox.addEventListener('touchstart', function (e) {
-      lbTouchStart = e.changedTouches[0].screenX;
+      lbTouchStart = e.changedTouches[0].clientX;
     }, { passive: true });
     lightbox.addEventListener('touchend', function (e) {
-      const diff = lbTouchStart - e.changedTouches[0].screenX;
+      const diff = lbTouchStart - e.changedTouches[0].clientX;
       if (Math.abs(diff) > 40) {
         showLightboxImage(diff > 0 ? lightboxIndex + 1 : lightboxIndex - 1);
       }

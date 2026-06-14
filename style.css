@@ -369,6 +369,7 @@ a {
   position: absolute;
   inset: 0;
   overflow: hidden;
+  touch-action: pan-y;
 }
 
 .carousel-track {
@@ -884,13 +885,19 @@ a {
   }
 
   .header-nav {
-    justify-content: center;
+    justify-content: space-between;
+    padding: 0 10px;
   }
 
-  /* На мобильном показываем только лого */
-  .nav-group-left .nav-link,
-  .nav-group-right .nav-link {
-    display: none;
+  .nav-group {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .nav-link {
+    padding: 0 6px;
+    font-size: 10px;
+    letter-spacing: 0.02em;
   }
 
   .header-logo-wrap.visible {
