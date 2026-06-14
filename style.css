@@ -346,18 +346,7 @@ a {
   min-height: 640px;
 }
 
-.dresscode-left {
-  flex: 0 0 50%;
-  overflow: hidden;
-}
-
-.dresscode-static-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
+.dresscode-left,
 .dresscode-right {
   flex: 0 0 50%;
   position: relative;
@@ -365,7 +354,22 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px 0;
+  padding: 80px 20px 40px; /* Увеличили верхний отступ для заголовка */
+}
+
+.dresscode-label {
+  position: absolute;
+  top: 35px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-gray);
+  margin: 0;
+  white-space: nowrap;
 }
 
 .carousel {
@@ -856,14 +860,11 @@ a {
     min-height: auto;
   }
 
-  .dresscode-left {
-    flex: 0 0 auto;
-    height: 420px;
-  }
-
+  .dresscode-left,
   .dresscode-right {
     flex: 0 0 auto;
-    height: 420px;
+    height: auto;
+    min-height: 420px;
   }
 
   .timer-block {
@@ -952,7 +953,7 @@ a {
   .dresscode-left,
   .dresscode-right {
     height: auto;
-    padding: 40px 10px;
+    padding: 60px 10px 40px;
   }
   
   .carousel { height: 460px; }
