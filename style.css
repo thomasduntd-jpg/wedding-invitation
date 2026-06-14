@@ -943,14 +943,16 @@ a {
   }
 
   /* Дресс-код */
-  .dresscode-left { 
+  .dresscode-left {
     height: 460px; /* Consistent with carousel height on mobile */
-    padding: 20px 10px;
+    padding: 40px 10px;
+    border-right: none;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
   }
   
-  .dresscode-right { 
+  .dresscode-right {
     height: 460px; /* Consistent with carousel height on mobile */
-    padding: 20px 10px;
+    padding: 40px 10px;
   }
   
   .carousel { height: 460px; }

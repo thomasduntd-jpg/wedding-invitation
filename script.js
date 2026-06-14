@@ -142,47 +142,48 @@ document.addEventListener('DOMContentLoaded', function () {
   /* ----------------------------------------------------------
      5. КАРУСЕЛЬ
   ---------------------------------------------------------- */
+  let activeGalleryImages = []; // Ссылка на массив картинок текущей открытой галереи
+  let lightboxIndex = 0;
+
   function createCarousel(carouselElementId) {
     const carouselElement = document.getElementById(carouselElementId);
-    if (!carouselElement) {
-      console.warn(`Carousel element with ID "${carouselElementId}" not found.`);
-      return {
-        getImages: () => [],
-        getSlides: () => []
-      };
-    }
+    if (!carouselElement) return;
   
     const carouselTrack = carouselElement.querySelector('.carousel-track');
     const btnPrev       = carouselElement.querySelector('.carousel-btn-prev');
     const btnNext       = carouselElement.querySelector('.carousel-btn-next');
     const dotsContainer = carouselElement.querySelector('.carousel-dots');
-  
-    const slides      = Array.from(carouselTrack.querySelectorAll('.carousel-slide'));
+    const slides        = Array.from(carouselTrack.querySelectorAll('.carousel-slide'));
+    
     let currentSlide  = 0;
     const totalSlides = slides.length;
+
+    // Собираем данные об изображениях этой конкретной карусели
+    const images = slides.map(slide => {
+      const img = slide.querySelector('img');
+      return { src: img.src, alt: img.alt };
+    });
   
-    // Initialize dots
-    if (dotsContainer && totalSlides > 0) {
-      slides.forEach(function (_, i) {
-        const dot = document.createElement('button');
-        dot.classList.add('carousel-dot');
-        dot.setAttribute('aria-label', 'Слайд ' + (i + 1));
-        if (i === 0) dot.classList.add('active');
-        dot.addEventListener('click', function () { goToSlide(i); });
-        dotsContainer.appendChild(dot);
+    // Точки
+    slides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.classList.add('carousel-dot');
+      if (i === 0) dot.classList.add('active');
+      dot.addEventListener('click', (e) => {
+        e.stopPropagation();
+        goToSlide(i);
       });
-    }
+      dotsContainer.appendChild(dot);
+    });
   
     function getDots() {
       return Array.from(dotsContainer.querySelectorAll('.carousel-dot'));
     }
   
     function goToSlide(index) {
-      if (index < 0) index = totalSlides - 1;
-      if (index >= totalSlides) index = 0;
-      currentSlide = index;
+      currentSlide = (index + totalSlides) % totalSlides;
       carouselTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
-      getDots().forEach(function (dot, i) {
+      getDots().forEach((dot, i) => {
         dot.classList.toggle('active', i === currentSlide);
       });
     }
@@ -190,109 +191,76 @@ document.addEventListener('DOMContentLoaded', function () {
     if (btnPrev) btnPrev.addEventListener('click', function () { goToSlide(currentSlide - 1); });
     if (btnNext) btnNext.addEventListener('click', function () { goToSlide(currentSlide + 1); });
   
-    /* Свайп на мобильном */
+    // Свайп
     let touchStartX = 0;
-  
-    carouselTrack.addEventListener('touchstart', function (e) {
+    carouselTrack.addEventListener('touchstart', (e) => {
       touchStartX = e.changedTouches[0].clientX;
     }, { passive: true });
-  
-    carouselTrack.addEventListener('touchend', function (e) {
-      const touchEndX = e.changedTouches[0].clientX;
-      const diffX = touchStartX - touchEndX;
-  
-      if (Math.abs(diffX) > 50) { // Increased threshold for better swipe detection
+    carouselTrack.addEventListener('touchend', (e) => {
+      const diffX = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diffX) > 50) {
         goToSlide(diffX > 0 ? currentSlide + 1 : currentSlide - 1);
       }
     }, { passive: true });
-  
-    // Public methods/properties for the carousel instance
-    return {
-      getImages: function() {
-        return slides.map(function (slide) {
-          const img = slide.querySelector('img');
-          return { src: img ? img.src : '', alt: img ? img.alt : '' };
-        });
-      },
-      getSlides: () => slides // Expose slides for attaching lightbox listeners
-    };
-  }
-  
-  // Initialize both carousels
-  const leftCarousel  = createCarousel('carousel-left');
-  const rightCarousel = createCarousel('carousel-right');
-  
-  // Combine all carousel images for the lightbox
-  const allCarouselImages = [
-    ...leftCarousel.getImages(),
-    ...rightCarousel.getImages()
-  ];
-  
-  // Collect all slides from both carousels for lightbox click events
-  const allSlidesForLightbox = [
-    ...leftCarousel.getSlides(),
-    ...rightCarousel.getSlides()
-  ];
-  
-  allSlidesForLightbox.forEach(function (slide, i) {
-    slide.addEventListener('click', function () { openLightbox(i); });
-  });
 
+    // Клик по слайду -> Открыть лайтбокс с контекстом этой карусели
+    slides.forEach((slide, i) => {
+      slide.addEventListener('click', () => {
+        activeGalleryImages = images;
+        openLightbox(i);
+      });
+    });
+  }
 
   /* ----------------------------------------------------------
      6. ЛАЙТБОКС
   ---------------------------------------------------------- */
-  const lightbox        = document.getElementById('lightbox');
-  const lightboxOverlay = document.getElementById('lightbox-overlay');
-  const lightboxMainImg = document.getElementById('lightbox-main-img');
-  const lightboxClose   = document.getElementById('lightbox-close');
-  const lightboxPrev    = document.getElementById('lightbox-prev');
-  const lightboxNext    = document.getElementById('lightbox-next');
-  const lightboxThumbs  = document.getElementById('lightbox-thumbnails');
+  const lightbox = document.getElementById('lightbox');
+  const lbMainImg = document.getElementById('lightbox-main-img');
+  const lbThumbs = document.getElementById('lightbox-thumbnails');
+  const lbClose = document.getElementById('lightbox-close');
 
-  let lightboxIndex = 0;
-
-  // Use allCarouselImages for lightbox
-  // const carouselImages = slides.map(function (slide) {
-  //   const img = slide.querySelector('img');
-  //   return { src: img ? img.src : '', alt: img ? img.alt : '' };
-  // });
-  const carouselImages = allCarouselImages; // Use the combined array
-
-  if (lightboxThumbs && carouselImages.length > 0) {
-    carouselImages.forEach(function (item, i) {
+  function openLightbox(index) {
+    if (!lightbox) return;
+    
+    // Генерируем миниатюры именно для той галереи, на которую нажали
+    lbThumbs.innerHTML = '';
+    activeGalleryImages.forEach((imgData, i) => {
       const thumb = document.createElement('img');
-      thumb.src   = item.src;
-      thumb.alt   = item.alt;
+      thumb.src = imgData.src;
       thumb.classList.add('lightbox-thumb');
-      if (i === 0) thumb.classList.add('active');
-      thumb.addEventListener('click', function () { showLightboxImage(i); });
-      lightboxThumbs.appendChild(thumb);
+      thumb.onclick = () => showLightboxImage(i);
+      lbThumbs.appendChild(thumb);
     });
-  }
 
-  function getThumbs() {
-    return lightboxThumbs
-      ? Array.from(lightboxThumbs.querySelectorAll('.lightbox-thumb'))
-      : [];
+    lightbox.classList.add('active');
+    document.getElementById('lightbox-overlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+    showLightboxImage(index);
   }
 
   function showLightboxImage(index) {
-    if (index < 0) index = totalSlides - 1;
-    if (index >= totalSlides) index = 0;
-    currentSlide = index;
-    carouselTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
-    getDots().forEach(function (dot, i) {
-      dot.classList.toggle('active', i === currentSlide);
-    });
+    lightboxIndex = (index + activeGalleryImages.length) % activeGalleryImages.length;
+    const data = activeGalleryImages[lightboxIndex];
+    lbMainImg.src = data.src;
+    lbMainImg.alt = data.alt;
+
+    const thumbs = lbThumbs.querySelectorAll('.lightbox-thumb');
+    thumbs.forEach((t, i) => t.classList.toggle('active', i === lightboxIndex));
   }
 
-  if (btnPrev) btnPrev.addEventListener('click', function () { goToSlide(currentSlide - 1); });
-  if (btnNext) btnNext.addEventListener('click', function () { goToSlide(currentSlide + 1); });
+  lbClose.onclick = () => {
+    lightbox.classList.remove('active');
+    document.getElementById('lightbox-overlay').classList.remove('active');
+    document.body.style.overflow = '';
+  };
 
-  /* Свайп на мобильном */
-  // The rest of the lightbox code remains the same, as it now uses `allCarouselImages`
-  // and `allSlidesForLightbox` for initialization and event handling.
+  document.getElementById('lightbox-prev').onclick = () => showLightboxImage(lightboxIndex - 1);
+  document.getElementById('lightbox-next').onclick = () => showLightboxImage(lightboxIndex + 1);
+
+  // Инициализация
+  createCarousel('carousel-left');
+  createCarousel('carousel-right');
 
   /* ----------------------------------------------------------
      7. ФОРМА — Google Sheets
