@@ -373,6 +373,7 @@ a {
   z-index: 10;
 }
 
+
 /* Розовые оттенки (слева) */
 .ray-1 { background: radial-gradient(circle, #ffccd5 0%, transparent 75%); left: -30%; top: -10%; transform: translate(var(--bg-offset-x-1), var(--bg-offset-y-1)); }
 .ray-3 { background: radial-gradient(circle, #ff9eb5 0%, transparent 75%); left: -25%; top: 35%;  transform: translate(var(--bg-offset-x-3), var(--bg-offset-y-3)); }
@@ -460,7 +461,7 @@ a {
 #timing {
   background: transparent;
   padding-bottom: 80px;
-  border-top: 2px solid #9b9b9b;
+  border-top: 1px solid #9b9b9b;
 }
 
 .timing-container {
@@ -499,7 +500,7 @@ a {
 ============================================================ */
 #address {
   background: transparent;
-  border-top: 2px solid #9b9b9b;
+  border-top: 1px solid #9b9b9b;
 }
 
 .map-container {
@@ -520,8 +521,8 @@ a {
    ДРЕСС-КОД
 ============================================================ */
 #dresscode {
-  background: transparent;
-  border-top: 2px solid #9b9b9b;
+  background: #ffffff;
+  border-top: 1px solid #9b9b9b;
 }
 
 .dresscode-layout {
@@ -781,7 +782,7 @@ a {
 #wishes {
   background: transparent;
   padding-bottom: 90px;
-  border-top: 2px solid #9b9b9b;
+  border-top: 1px solid #9b9b9b;
 }
 
 .wishes-content {
@@ -816,7 +817,7 @@ a {
 #form {
   background: transparent;
   padding-bottom: 100px;
-  border-top: 2px solid #9b9b9b;
+  border-top: 1px solid #9b9b9b;
 }
 
 .survey-form {
