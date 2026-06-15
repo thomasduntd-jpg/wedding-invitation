@@ -27,37 +27,57 @@ document.addEventListener('DOMContentLoaded', function () {
   /* ----------------------------------------------------------
      2. 3D ЭФФЕКТ ФОТО
   ---------------------------------------------------------- */
-  const photo3d = document.getElementById('photo3d');
+  const wrappers = document.querySelectorAll('.photo-3d-wrapper');
+  const photoGroup = document.querySelector('.hero-photo-group');
 
-  if (photo3d) {
-    photo3d.addEventListener('mousemove', function (e) {
-      const rect   = photo3d.getBoundingClientRect();
-      const x      = (e.clientX - rect.left) / rect.width  - 0.5;
-      const y      = (e.clientY - rect.top)  / rect.height - 0.5;
-      const rotateY =  x * 18;
-      const rotateX = -y * 14;
-      photo3d.style.transform =
-        `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03,1.03,1.03)`;
+  if (wrappers.length > 0) {
+    wrappers.forEach(wrapper => {
+      wrapper.addEventListener('mousemove', function (e) {
+        // Работает только на десктопах (больше 900px)
+        if (window.innerWidth <= 900) return;
+
+        const rect = wrapper.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+        // Определяем базовый горизонтальный сдвиг в зависимости от того, развернуты ли фото
+        let baseTranslate = 'translateX(0)';
+        const isHoveredGroup = photoGroup.matches(':hover');
+
+        if (isHoveredGroup) {
+          const idx = wrapper.getAttribute('data-index');
+          if (idx === "1") baseTranslate = 'translateX(-105%)';
+          if (idx === "2") baseTranslate = 'translateX(105%)';
+        }
+
+        // Применяем 3D наклон + сохраняем позицию
+        const rotateY = x * 20;
+        const rotateX = -y * 20;
+
+        // Убираем transition на время движения мыши для мгновенного отклика
+        wrapper.style.transition = 'none';
+        wrapper.style.transform = `${baseTranslate} perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+        wrapper.style.zIndex = "10";
+      });
+
+      wrapper.addEventListener('mouseleave', function () {
+        if (window.innerWidth <= 900) return;
+        
+        // Возвращаем плавность и сбрасываем стиль, чтобы CSS взял управление на себя
+        wrapper.style.transition = '';
+        wrapper.style.transform = '';
+        wrapper.style.zIndex = '';
+      });
     });
+  }
 
-    photo3d.addEventListener('mouseleave', function () {
-      photo3d.style.transform =
-        'perspective(900px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)';
-    });
-
-    photo3d.addEventListener('touchmove', function (e) {
-      if (!e.touches[0]) return;
-      const rect  = photo3d.getBoundingClientRect();
-      const touch = e.touches[0];
-      const x = (touch.clientX - rect.left) / rect.width  - 0.5;
-      const y = (touch.clientY - rect.top)  / rect.height - 0.5;
-      photo3d.style.transform =
-        `perspective(900px) rotateX(${-y * 10}deg) rotateY(${x * 12}deg) scale3d(1.02,1.02,1.02)`;
-    }, { passive: true });
-
-    photo3d.addEventListener('touchend', function () {
-      photo3d.style.transform =
-        'perspective(900px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)';
+  // Для мобильной версии (перелистывание кликом)
+  const photoStack = document.getElementById('photo-stack');
+  if (photoStack) {
+    photoStack.addEventListener('click', function() {
+      if (window.innerWidth > 900) return;
+      // Логика смены классов для мобильной версии остается (pos-0, pos-1, pos-2)
+      // как было реализовано в предыдущем шаге.
     });
   }
 

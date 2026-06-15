@@ -183,7 +183,7 @@ a {
 .hero-logo-wrap {
   position: relative;
   z-index: 2;
-  margin-top: calc(var(--header-h) + 48px);
+  margin-top: calc(var(--header-h) + 80px); /* Увеличили отступ сверху */
   text-align: center;
 }
 
@@ -200,7 +200,7 @@ a {
 .hero-photo-group {
   position: relative;
   z-index: 2;
-  margin-top: 44px;
+  margin-top: 80px; /* Увеличили расстояние от логотипа */
   /* Размер группы равен размеру фото */
   width: clamp(260px, 38vw, 460px);
   /* Высота авто — подстраивается под оригинальное фото */
@@ -258,14 +258,14 @@ a {
 
 /* Состояние стопки (дефолт) */
 .photo-3d-wrapper[data-index="0"] { z-index: 3; transform: rotate(0deg); }
-.photo-3d-wrapper[data-index="1"] { z-index: 2; transform: rotate(-4deg) translateX(-15px) translateY(-5px); }
-.photo-3d-wrapper[data-index="2"] { z-index: 1; transform: rotate(4deg) translateX(15px) translateY(-5px); }
+.photo-3d-wrapper[data-index="1"] { z-index: 2; transform: rotate(-6deg) translateX(-20px) translateY(-10px); }
+.photo-3d-wrapper[data-index="2"] { z-index: 1; transform: rotate(6deg) translateX(20px) translateY(-10px); }
 
 /* Зона наведения, которая не дает фото сложиться сразу */
 .hero-photo-group::after {
   content: '';
   position: absolute;
-  inset: -20px -60%;
+  inset: -60px -120%; /* Увеличили зону, чтобы фото не дёргались при переносе курсора */
   z-index: 1;
   pointer-events: auto;
 }
@@ -312,8 +312,8 @@ a {
 .hero-text {
   position: relative;
   z-index: 2;
-  margin-top: 36px;
-  margin-bottom: 64px;
+  margin-top: 80px; /* Увеличили расстояние от фото до текста */
+  margin-bottom: 100px;
   text-align: center;
   color: var(--color-light);
   font-family: var(--font-body);
