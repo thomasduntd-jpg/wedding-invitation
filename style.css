@@ -238,23 +238,74 @@ a {
   position: relative;
   z-index: 2;              /* поверх decoration */
   width: 100%;
-  /* ОРИГИНАЛЬНЫЕ ПРОПОРЦИИ — убираем aspect-ratio и border-radius */
-  border-radius: 0;        /* ✅ убраны скругления */
-  overflow: visible;       /* ✅ не обрезаем */
-  box-shadow: 0 32px 80px rgba(0,0,0,0.55);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1000px;
+}
+
+.photo-3d-wrapper {
+  position: absolute;
+  width: 100%;
+  height: auto;
   cursor: pointer;
   transform-style: preserve-3d;
-  transition: transform 0.08s linear;
-  will-change: transform;
+  transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform, z-index;
+  box-shadow: 0 15px 45px rgba(0,0,0,0.4);
+}
+
+/* Состояние стопки (дефолт) */
+.photo-3d-wrapper[data-index="0"] { z-index: 3; transform: rotate(0deg); }
+.photo-3d-wrapper[data-index="1"] { z-index: 2; transform: rotate(-4deg) translateX(-15px) translateY(-5px); }
+.photo-3d-wrapper[data-index="2"] { z-index: 1; transform: rotate(4deg) translateX(15px) translateY(-5px); }
+
+/* Зона наведения, которая не дает фото сложиться сразу */
+.hero-photo-group::after {
+  content: '';
+  position: absolute;
+  inset: -20px -60%;
+  z-index: 1;
+  pointer-events: auto;
+}
+
+/* Распределение по горизонтали при наведении на ГРУППУ */
+@media (min-width: 901px) {
+  .hero-photo-group:hover .photo-3d-wrapper[data-index="1"] {
+    transform: translateX(-105%) rotate(0deg);
+  }
+  .hero-photo-group:hover .photo-3d-wrapper[data-index="2"] {
+    transform: translateX(105%) rotate(0deg);
+  }
+  .hero-photo-group:hover .photo-3d-wrapper[data-index="0"] {
+    transform: translateX(0) rotate(0deg);
+  }
 }
 
 .photo-3d {
   width: 100%;
-  height: auto;            /* ✅ оригинальные пропорции */
+  height: auto;
   object-fit: contain;
   display: block;
   pointer-events: none;
-  border-radius: 0;        /* ✅ убраны скругления */
+}
+
+/* Мобильная версия: порядок слоев */
+@media (max-width: 900px) {
+  .photo-3d-wrapper {
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), z-index 0s 0.2s;
+  }
+  .photo-3d-wrapper.pos-0 { z-index: 3; transform: translate3d(0, 0, 0) scale(1); }
+  .photo-3d-wrapper.pos-1 { z-index: 2; transform: translate3d(0, 0, -20px) scale(0.95); opacity: 0.8; }
+  .photo-3d-wrapper.pos-2 { z-index: 1; transform: translate3d(0, 0, -40px) scale(0.9); opacity: 0.6; }
+  
+  /* Анимация "вылета" при смене */
+  .photo-3d-wrapper.switching {
+    transform: translate3d(100%, 0, 50px) rotate(10deg) scale(1.05) !important;
+    z-index: 10 !important;
+    opacity: 0;
+  }
 }
 
 /* Текст приглашения */
