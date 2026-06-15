@@ -341,10 +341,55 @@ a {
 }
 
 /* ============================================================
+   SCROLL-DRIVEN RAYS (ФОНОВЫЕ ЛУЧИ)
+============================================================ */
+.scroll-gradient-background {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-color: #fff;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.gradient-ray {
+  position: absolute;
+  width: 55vw; /* Уменьшили ширину, чтобы центр был белее */
+  height: 100vh;
+  filter: blur(100px);
+  opacity: 0.55;
+  will-change: transform;
+  pointer-events: none;
+}
+
+/* Эффект шума/зернистости */
+.noise-overlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0.18; /* Степень видимости зерна */
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  z-index: 10;
+}
+
+/* Розовые оттенки (слева) */
+.ray-1 { background: radial-gradient(circle, #ffccd5 0%, transparent 75%); left: -30%; top: -10%; transform: translate(var(--bg-offset-x-1), var(--bg-offset-y-1)); }
+.ray-3 { background: radial-gradient(circle, #ff9eb5 0%, transparent 75%); left: -25%; top: 35%;  transform: translate(var(--bg-offset-x-3), var(--bg-offset-y-3)); }
+.ray-5 { background: radial-gradient(circle, #f48fb1 0%, transparent 75%); left: -35%; bottom: -10%; transform: translate(var(--bg-offset-x-5), var(--bg-offset-y-5)); }
+.ray-7 { background: radial-gradient(circle, #fce4ec 0%, transparent 75%); left: -20%; top: 15%; transform: translate(var(--bg-offset-x-7), var(--bg-offset-y-7)); }
+
+/* Зеленые оттенки (справа) */
+.ray-2 { background: radial-gradient(circle, #dcf0d1 0%, transparent 75%); right: -30%; top: 0%;    transform: translate(var(--bg-offset-x-2), var(--bg-offset-y-2)); }
+.ray-4 { background: radial-gradient(circle, #9cdba0 0%, transparent 75%); right: -25%; top: 45%;   transform: translate(var(--bg-offset-x-4), var(--bg-offset-y-4)); }
+.ray-6 { background: radial-gradient(circle, #a5d6a7 0%, transparent 75%); right: -35%; bottom: 0%; transform: translate(var(--bg-offset-x-6), var(--bg-offset-y-6)); }
+.ray-8 { background: radial-gradient(circle, #e8f5e9 0%, transparent 75%); right: -20%; top: 20%; transform: translate(var(--bg-offset-x-8), var(--bg-offset-y-8)); }
+
+/* ============================================================
    DETAILS SECTION
 ============================================================ */
 #details {
-  background: #fff;
+  background: transparent;
   padding: 80px 24px; /* Отступы сверху и снизу */
   text-align: center;
 }
@@ -402,13 +447,20 @@ a {
   text-align: center;
 }
 
+
+
+@keyframes gradient-flow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
 /* ============================================================
    ТАЙМИНГ
 ============================================================ */
 #timing {
-  background: #fff;
+  background: transparent;
   padding-bottom: 80px;
-  border-top: 2px solid #eeeeee;
+  border-top: 2px solid #9b9b9b;
 }
 
 .timing-container {
@@ -446,8 +498,8 @@ a {
    АДРЕС
 ============================================================ */
 #address {
-  background: #fff;
-  border-top: 2px solid #eeeeee;
+  background: transparent;
+  border-top: 2px solid #9b9b9b;
 }
 
 .map-container {
@@ -468,8 +520,8 @@ a {
    ДРЕСС-КОД
 ============================================================ */
 #dresscode {
-  background: #fff;
-  border-top: 2px solid #eeeeee;
+  background: transparent;
+  border-top: 2px solid #9b9b9b;
 }
 
 .dresscode-layout {
@@ -483,7 +535,7 @@ a {
 .dresscode-right {
   flex: 1;
   position: relative;
-  background: #f4f4f4;
+  background: rgba(255, 255, 255, 0.5); /* Немного прозрачности для фреймов */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -727,9 +779,9 @@ a {
    ПОЖЕЛАНИЯ
 ============================================================ */
 #wishes {
-  background: #fff;
+  background: transparent;
   padding-bottom: 90px;
-  border-top: 2px solid #eeeeee;
+  border-top: 2px solid #9b9b9b;
 }
 
 .wishes-content {
@@ -762,9 +814,9 @@ a {
    АНКЕТА
 ============================================================ */
 #form {
-  background: #fff;
+  background: transparent;
   padding-bottom: 100px;
-  border-top: 2px solid #eeeeee;
+  border-top: 2px solid #9b9b9b;
 }
 
 .survey-form {
@@ -935,8 +987,7 @@ a {
 #timer {
   padding: 80px 24px 90px;
   text-align: center;
-  background: #fafafa;
-  border-top: 1px solid #ebebeb;
+  border-top: 1px solid #9b9b9b;
 }
 
 .timer-blocks {
@@ -988,8 +1039,8 @@ a {
 .site-footer {
   padding: 40px 24px;
   text-align: center;
-  border-top: 1px solid #ebebeb;
-  background: #fff;
+  border-top: 1px solid #9b9b9b;
+  background: transparent;
 }
 
 .site-footer p {
@@ -1123,7 +1174,7 @@ a {
     padding: 0;
     justify-content: center;
     align-self: center;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
   }
 
   .palette-item {

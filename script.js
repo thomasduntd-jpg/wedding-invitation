@@ -410,4 +410,86 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  /* ----------------------------------------------------------
+     8. ОТСЛЕЖИВАНИЕ ЗАГОЛОВКОВ (IntersectionObserver)
+  ---------------------------------------------------------- */
+  const observerOptions = {
+    root: null,
+    rootMargin: '-80px 0px -20% 0px', // Срабатывает, когда заголовок под хедером
+    threshold: 0
+  };
+
+  const titleObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      // Ищем заголовки внутри секции
+      const titles = entry.target.querySelectorAll('.section-title-display, .section-title-serif');
+      
+      if (entry.isIntersecting) {
+        titles.forEach(t => t.classList.add('gradient-text-animated'));
+      } else {
+        titles.forEach(t => t.classList.remove('gradient-text-animated'));
+      }
+    });
+  }, observerOptions);
+
+  // Секции, в которых нужно анимировать заголовки
+  const sectionsWithTitles = [
+    'details', 'timing', 'dresscode', 'wishes', 'form', 'address', 'timer'
+  ];
+
+  sectionsWithTitles.forEach(id => {
+    const section = document.getElementById(id);
+    if (section) titleObserver.observe(section);
+  });
+
+  /* ----------------------------------------------------------
+     9. SCROLL-DRIVEN BACKGROUND GRADIENT
+  ---------------------------------------------------------- */
+  const scrollGradientBg = document.querySelector('.scroll-gradient-background');
+
+  if (scrollGradientBg) {
+    function updateGradientPosition() {
+      const scrollY = window.scrollY;
+
+      // Small multipliers to make the movement subtle and create a "shimmer" effect
+      // Different multipliers for each gradient to ensure varied movement
+      const moveX1 = scrollY * 0.15;
+      const moveY1 = scrollY * 0.08;
+      const moveX2 = scrollY * -0.12;
+      const moveY2 = scrollY * 0.18;
+      const moveX3 = scrollY * 0.22;
+      const moveY3 = scrollY * -0.06;
+      const moveX4 = scrollY * -0.09;
+      const moveY4 = scrollY * 0.15;
+      const moveX5 = scrollY * 0.18;
+      const moveY5 = scrollY * 0.12;
+      const moveX6 = scrollY * -0.15;
+      const moveY6 = scrollY * -0.09;
+      const moveX7 = scrollY * 0.11;
+      const moveY7 = scrollY * 0.20;
+      const moveX8 = scrollY * -0.18;
+      const moveY8 = scrollY * 0.07;
+
+      scrollGradientBg.style.setProperty('--bg-offset-x-1', `${moveX1}px`);
+      scrollGradientBg.style.setProperty('--bg-offset-y-1', `${moveY1}px`);
+      scrollGradientBg.style.setProperty('--bg-offset-x-2', `${moveX2}px`);
+      scrollGradientBg.style.setProperty('--bg-offset-y-2', `${moveY2}px`);
+      scrollGradientBg.style.setProperty('--bg-offset-x-3', `${moveX3}px`);
+      scrollGradientBg.style.setProperty('--bg-offset-y-3', `${moveY3}px`);
+      scrollGradientBg.style.setProperty('--bg-offset-x-4', `${moveX4}px`);
+      scrollGradientBg.style.setProperty('--bg-offset-y-4', `${moveY4}px`);
+      scrollGradientBg.style.setProperty('--bg-offset-x-5', `${moveX5}px`);
+      scrollGradientBg.style.setProperty('--bg-offset-y-5', `${moveY5}px`);
+      scrollGradientBg.style.setProperty('--bg-offset-x-6', `${moveX6}px`);
+      scrollGradientBg.style.setProperty('--bg-offset-y-6', `${moveY6}px`);
+      scrollGradientBg.style.setProperty('--bg-offset-x-7', `${moveX7}px`);
+      scrollGradientBg.style.setProperty('--bg-offset-y-7', `${moveY7}px`);
+      scrollGradientBg.style.setProperty('--bg-offset-x-8', `${moveX8}px`);
+      scrollGradientBg.style.setProperty('--bg-offset-y-8', `${moveY8}px`);
+    }
+
+    window.addEventListener('scroll', updateGradientPosition, { passive: true });
+    updateGradientPosition(); // Set initial position
+  }
+
 }); /* конец DOMContentLoaded */
