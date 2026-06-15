@@ -395,9 +395,49 @@ a {
   font-weight: normal;
   color: var(--color-dark);
   line-height: 1.25;
+  line-height: 1.1;
   margin-bottom: 48px;
   letter-spacing: -0.03em; /* Уменьшено на 5% от 0.02em */
   text-align: center;
+}
+
+/* ============================================================
+   ТАЙМИНГ
+============================================================ */
+#timing {
+  background: #fff;
+  padding-bottom: 80px;
+}
+
+.timing-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.timing-list {
+  margin-top: 20px;
+}
+
+.timing-item {
+  margin-bottom: 44px;
+}
+
+.timing-time {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-gray);
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+}
+
+.timing-text {
+  font-family: var(--font-body);
+  font-size: clamp(18px, 2.2vw, 24px);
+  font-weight: 300;
+  color: var(--color-dark);
 }
 
 /* ============================================================
