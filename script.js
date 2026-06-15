@@ -29,42 +29,49 @@ document.addEventListener('DOMContentLoaded', function () {
   ---------------------------------------------------------- */
   const wrappers = document.querySelectorAll('.photo-3d-wrapper');
   const photoGroup = document.querySelector('.hero-photo-group');
+  let mobileOrder = [0, 1, 2]; // Индексы для управления слоями на мобильных
+
+  function updateMobileClasses() {
+    wrappers.forEach((el, i) => {
+      const pos = mobileOrder.indexOf(i);
+      el.classList.remove('pos-0', 'pos-1', 'pos-2');
+      el.classList.add(`pos-${pos}`);
+    });
+  }
 
   if (wrappers.length > 0) {
+    // Инициализируем мобильные классы сразу
+    if (window.innerWidth <= 900) updateMobileClasses();
+
     wrappers.forEach(wrapper => {
       wrapper.addEventListener('mousemove', function (e) {
-        // Работает только на десктопах (больше 900px)
         if (window.innerWidth <= 900) return;
 
         const rect = wrapper.getBoundingClientRect();
         const x = (e.clientX - rect.left) / rect.width - 0.5;
         const y = (e.clientY - rect.top) / rect.height - 0.5;
 
-        // Определяем базовый горизонтальный сдвиг в зависимости от того, развернуты ли фото
+        const idx = wrapper.getAttribute('data-index');
         let baseTranslate = 'translateX(0)';
-        const isHoveredGroup = photoGroup.matches(':hover');
-
-        if (isHoveredGroup) {
-          const idx = wrapper.getAttribute('data-index');
+        
+        // Если мышь в зоне группы, сохраняем раздвинутое состояние
+        if (photoGroup && photoGroup.matches(':hover')) {
           if (idx === "1") baseTranslate = 'translateX(-105%)';
           if (idx === "2") baseTranslate = 'translateX(105%)';
         }
 
-        // Применяем 3D наклон + сохраняем позицию
-        const rotateY = x * 20;
-        const rotateX = -y * 20;
-
-        // Убираем transition на время движения мыши для мгновенного отклика
-        wrapper.style.transition = 'none';
-        wrapper.style.transform = `${baseTranslate} perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
-        wrapper.style.zIndex = "10";
+        // Вместо none используем короткий переход для "гладкости" наклона
+        wrapper.style.transition = 'transform 0.3s cubic-bezier(0.2, 0, 0.2, 1)';
+        wrapper.style.transform = `${baseTranslate} perspective(1000px) rotateX(${-y * 12}deg) rotateY(${x * 12}deg) scale3d(1.05, 1.05, 1.05)`;
+        
+        // Сохраняем иерархию: центральная (0) всегда выше боковых (1, 2)
+        wrapper.style.zIndex = (idx === "0") ? "20" : "5";
       });
 
       wrapper.addEventListener('mouseleave', function () {
         if (window.innerWidth <= 900) return;
         
-        // Возвращаем плавность и сбрасываем стиль, чтобы CSS взял управление на себя
-        wrapper.style.transition = '';
+        wrapper.style.transition = 'transform 0.6s cubic-bezier(0.34, 1.3, 0.64, 1)';
         wrapper.style.transform = '';
         wrapper.style.zIndex = '';
       });
@@ -76,8 +83,24 @@ document.addEventListener('DOMContentLoaded', function () {
   if (photoStack) {
     photoStack.addEventListener('click', function() {
       if (window.innerWidth > 900) return;
-      // Логика смены классов для мобильной версии остается (pos-0, pos-1, pos-2)
-      // как было реализовано в предыдущем шаге.
+
+      // Индекс текущей верхней фотографии
+      const topIdx = mobileOrder[0];
+      const topEl = wrappers[topIdx];
+
+      if (topEl.classList.contains('switching')) return;
+
+      // Добавляем класс для анимации вылета
+      topEl.classList.add('switching');
+
+      setTimeout(() => {
+        // Перемещаем первый элемент массива в конец
+        const shifted = mobileOrder.shift();
+        mobileOrder.push(shifted);
+
+        updateMobileClasses();
+        topEl.classList.remove('switching');
+      }, 450); // Чуть меньше времени transition в CSS
     });
   }
 
