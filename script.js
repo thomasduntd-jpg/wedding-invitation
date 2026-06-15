@@ -92,6 +92,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
       // Добавляем класс для анимации вылета
       topEl.classList.add('switching');
+      // Сразу отправляем фото на задний план, чтобы не перекрывало следующее
+      topEl.style.zIndex = '0'; 
 
       setTimeout(() => {
         // Перемещаем первый элемент массива в конец
@@ -100,6 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         updateMobileClasses();
         topEl.classList.remove('switching');
+        topEl.style.zIndex = ''; // Сбрасываем инлайновый z-index, чтобы CSS взял управление
       }, 450); // Чуть меньше времени transition в CSS
     });
   }

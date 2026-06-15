@@ -304,7 +304,7 @@ a {
   /* Анимация "вылета" при смене */
   .photo-3d-wrapper.switching {
     transform: translate3d(110%, -20px, 80px) rotate(15deg) scale(1.05) !important;
-    z-index: 10 !important;
+    /* z-index теперь управляется JS, чтобы избежать дребезжания */
     opacity: 0;
   }
 }
