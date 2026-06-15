@@ -340,13 +340,48 @@ a {
 }
 
 /* ============================================================
+   DETAILS SECTION
+============================================================ */
+#details {
+  background: #fff;
+  padding: 80px 24px; /* Отступы сверху и снизу */
+  text-align: center;
+}
+
+.details-content {
+  max-width: 600px;
+  margin: 0 auto;
+  font-family: var(--font-body);
+  font-size: clamp(16px, 1.8vw, 20px);
+  line-height: 1.7;
+  color: var(--color-dark);
+}
+
+.details-content p {
+  margin-bottom: 1.2em; /* Отступ между параграфами */
+}
+
+.details-content p:last-child {
+  margin-bottom: 0;
+}
+
+.details-content strong {
+  font-weight: 600;
+}
+
+.details-content a {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* ============================================================
    ОБЩИЕ ЗАГОЛОВКИ СЕКЦИЙ
 ============================================================ */
 .section-title-display {
   font-family: var(--font-display);
   font-size: clamp(40px, 7vw, 90px);
   font-weight: normal;
-  letter-spacing: 0.06em;
+  letter-spacing: -0.03em; /* Уменьшено на 5% от 0.06em */
   text-transform: uppercase;
   text-align: center;
   color: var(--color-dark);
@@ -361,7 +396,7 @@ a {
   color: var(--color-dark);
   line-height: 1.25;
   margin-bottom: 48px;
-  letter-spacing: 0.02em;
+  letter-spacing: -0.03em; /* Уменьшено на 5% от 0.02em */
   text-align: center;
 }
 
