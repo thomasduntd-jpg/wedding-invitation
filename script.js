@@ -90,20 +90,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
       if (topEl.classList.contains('switching')) return;
 
-      // Добавляем класс для анимации вылета
+      // Начинаем анимацию ухода текущей фотографии
       topEl.classList.add('switching');
-      // Сразу отправляем фото на задний план, чтобы не перекрывало следующее
-      topEl.style.zIndex = '0'; 
+      topEl.style.zIndex = '0';
+
+      // Мгновенно обновляем порядок в массиве и классы, 
+      // чтобы следующая фотография начала движение вперед одновременно с улетом первой
+      const shifted = mobileOrder.shift();
+      mobileOrder.push(shifted);
+      updateMobileClasses();
 
       setTimeout(() => {
-        // Перемещаем первый элемент массива в конец
-        const shifted = mobileOrder.shift();
-        mobileOrder.push(shifted);
-
-        updateMobileClasses();
         topEl.classList.remove('switching');
-        topEl.style.zIndex = ''; // Сбрасываем инлайновый z-index, чтобы CSS взял управление
-      }, 450); // Чуть меньше времени transition в CSS
+        topEl.style.zIndex = '';
+      }, 500); // Длительность должна соответствовать времени перехода в CSS
     });
   }
 
