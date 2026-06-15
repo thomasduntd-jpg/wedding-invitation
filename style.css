@@ -26,6 +26,7 @@
   --max-w:    1200px;
 }
 
+
 /* ============================================================
    RESET
 ============================================================ */
@@ -407,6 +408,7 @@ a {
 #timing {
   background: #fff;
   padding-bottom: 80px;
+  border-top: 2px solid #eeeeee;
 }
 
 .timing-container {
@@ -445,6 +447,7 @@ a {
 ============================================================ */
 #address {
   background: #fff;
+  border-top: 2px solid #eeeeee;
 }
 
 .map-container {
@@ -466,6 +469,7 @@ a {
 ============================================================ */
 #dresscode {
   background: #fff;
+  border-top: 2px solid #eeeeee;
 }
 
 .dresscode-layout {
@@ -759,6 +763,7 @@ a {
 #form {
   background: #fff;
   padding-bottom: 100px;
+  border-top: 2px solid #eeeeee;
 }
 
 .survey-form {
