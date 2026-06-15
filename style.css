@@ -729,6 +729,7 @@ a {
 #wishes {
   background: #fff;
   padding-bottom: 90px;
+  border-top: 2px solid #eeeeee;
 }
 
 .wishes-content {
@@ -1122,6 +1123,7 @@ a {
     padding: 0;
     justify-content: center;
     align-self: center;
+    margin-bottom: 20px;
   }
 
   .palette-item {
