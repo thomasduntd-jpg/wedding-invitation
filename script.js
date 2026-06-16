@@ -335,7 +335,7 @@ document.addEventListener('DOMContentLoaded', function () {
           startFlowerAnimation();
         }
       });
-    }, { threshold: 0.1 }); // Trigger when 10% of the section is visible
+    }, { threshold: 0 }); // Trigger as soon as the section enters the frame
 
     observer.observe(wishesSection);
   }

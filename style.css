@@ -700,7 +700,7 @@ input {
 .wishes-square {
   position: absolute;
   left: 50%;
-  top: 50%; /* Centered vertically within wishes-decor-wrap */
+  top: 50%; /* Lowered to extend into the next section */
   width: clamp(300px, 80vw, 700px); /* Исправлен и расширен размер прямоугольника */
   height: clamp(150px, 40vw, 300px);
   border: 2px solid var(--accent-red);
@@ -1158,10 +1158,12 @@ input {
   }
 
   .wishes-decor-wrap {
+    margin-top: 60px; /* Reduced distance from text on mobile */
     height: 280px;
   }
 
   .wishes-square {
+    top: 80%; /* Further lowered for mobile spill-over effect */
     width: 280px;
     height: 140px;
   }
