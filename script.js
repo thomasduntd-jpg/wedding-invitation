@@ -119,6 +119,113 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   /* =========================================================
+     HERO SECTION - HT ANIMATION
+  ========================================================= */
+  const heroPhotoImg = document.querySelector('.hero-photo');
+  const heroComp = document.querySelector('.hero-composition');
+  const heroSect = document.getElementById('hero');
+
+  if (heroPhotoImg && heroComp && heroSect) {
+    const htImages = [
+      'images/ht-1.png',
+      'images/ht-2.png',
+      'images/ht-3.png',
+      'images/ht-4.png',
+      'images/ht-5.png',
+      'images/ht-6.png',
+      'images/ht-7.png',
+    ];
+
+    let htInterval = null;
+    let htTimeout = null;
+    const activeHts = new Set();
+    let isHeroHovering = false;
+
+    const generateHt = () => {
+      if (activeHts.size > 15) return;
+
+      const ht = document.createElement('img');
+      ht.src = htImages[Math.floor(Math.random() * htImages.length)];
+      ht.className = 'generated-ht';
+      
+      const size = Math.random() * 40 + 40;
+      ht.style.width = `${size}px`;
+      ht.style.height = 'auto';
+
+      const wrapRect = heroComp.getBoundingClientRect();
+      const startX = Math.random() * (wrapRect.width - size);
+      const startY = Math.random() * (wrapRect.height - size);
+      
+      ht.style.left = `${startX}px`;
+      ht.style.top = `${startY}px`;
+
+      heroComp.appendChild(ht);
+      activeHts.add(ht);
+
+      void ht.offsetWidth;
+
+      const moveX = (Math.random() - 0.5) * 400;
+      const moveY = (Math.random() - 0.5) * 250;
+      const scale = Math.random() * 0.4 + 0.8;
+
+      ht.style.opacity = 1;
+      ht.style.transform = `translate(${moveX}px, ${moveY}px) scale(${scale})`;
+
+      setTimeout(() => {
+        ht.style.opacity = 0;
+        ht.style.transform = `translate(${moveX + (Math.random() - 0.5) * 30}px, ${moveY + (Math.random() - 0.5) * 30}px) scale(${scale * 0.7})`;
+        setTimeout(() => {
+          ht.remove();
+          activeHts.delete(ht);
+        }, 500);
+      }, 1500);
+    };
+
+    const startHtAnimation = () => {
+      if (htInterval) return;
+      htInterval = setInterval(generateHt, 200);
+      htTimeout = setTimeout(() => {
+        clearInterval(htInterval);
+        htInterval = null;
+      }, 10000);
+    };
+
+    const stopHtAnimation = () => {
+      clearInterval(htInterval);
+      clearTimeout(htTimeout);
+      htInterval = null;
+      htTimeout = null;
+
+      activeHts.forEach(ht => {
+        ht.style.opacity = 0;
+        ht.style.transform += ` scale(0.5)`;
+        setTimeout(() => { ht.remove(); activeHts.delete(ht); }, 500);
+      });
+    };
+
+    heroPhotoImg.addEventListener('mouseenter', () => {
+      isHeroHovering = true;
+      startHtAnimation();
+    });
+    heroPhotoImg.addEventListener('mouseleave', () => {
+      isHeroHovering = false;
+      stopHtAnimation();
+    });
+
+    const heroObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) {
+          stopHtAnimation();
+        } else if (isHeroHovering && !htInterval) {
+          startHtAnimation();
+        }
+      });
+    }, { threshold: 0.1 });
+
+    heroObserver.observe(heroSect);
+  }
+
+  /* =========================================================
      WISHES SECTION - FLOWER ANIMATION
   ========================================================= */
   const wishesFlowers = document.querySelector('.wishes-flowers');
