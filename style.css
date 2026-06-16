@@ -196,6 +196,7 @@ input {
   display: flex;
   align-items: center;
   justify-content: center;
+  perspective: 1200px; /* Глубина 3D-сцены */
 }
 
 .hero-line {
@@ -225,6 +226,10 @@ input {
   width: 378px;
   background: var(--white-soft);
   padding: 24px;
+  transform-style: preserve-3d;
+  will-change: transform;
+  /* Плавный возврат при потере фокуса */
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .hero-photo {
@@ -531,10 +536,13 @@ input {
 .carousel-dot {
   width: 8px;
   height: 8px;
+  padding: 0;
   border: none;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.55);
   cursor: pointer;
+  flex-shrink: 0;
+  aspect-ratio: 1 / 1;
 }
 
 .carousel-dot.active {
@@ -663,7 +671,7 @@ input {
   max-width: 860px;
   margin: 0 auto;
   font-family: var(--font-body);
-  font-size: clamp(22px, 2.1vw, 34px);
+  font-size: clamp(30px, 1vw, 34px);
   line-height: 0.98;
   letter-spacing: -0.05em;
   color: var(--accent-red);

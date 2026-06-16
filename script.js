@@ -40,6 +40,85 @@ document.addEventListener('DOMContentLoaded', function () {
   setInterval(updateTimer, 1000);
 
   /* =========================================================
+     TILT EFFECT ДЛЯ ФОТО В HERO
+  ========================================================= */
+  const heroPhotoFrame = document.querySelector('.hero-photo-frame');
+  const heroSection = document.getElementById('hero');
+
+  if (heroPhotoFrame && heroSection) {
+    let targetMouseX = 0;
+    let targetMouseY = 0;
+    let currentMouseX = 0;
+    let currentMouseY = 0;
+    let isInteract = false;
+
+    const updateTilt = () => {
+      // 1. Расчет наклона при скролле (от 0 до 1 высоты экрана)
+      const scrollY = window.scrollY;
+      const threshold = window.innerHeight;
+      const scrollProgress = Math.min(scrollY / threshold, 1);
+      
+      // Наклон "на нас" при скролле вниз (от 0 до -15 градусов)
+      const scrollTiltX = scrollProgress * -15; 
+
+      // 2. Сглаживание движения мыши/тапа (Lerp)
+      const lerpFactor = 0.08; // Коэффициент "вязкости" анимации
+      currentMouseX += (targetMouseX - currentMouseX) * lerpFactor;
+      currentMouseY += (targetMouseY - currentMouseY) * lerpFactor;
+
+      // Если взаимодействия нет, плавно возвращаемся в 0
+      if (!isInteract) {
+        targetMouseX *= 0.9;
+        targetMouseY *= 0.9;
+      }
+
+      const mouseTiltY = currentMouseY * -20; // Инверсия по вертикали
+      const mouseTiltX = currentMouseX * 20;
+
+      // Итоговая трансформация: сумма скролла и движения мыши с ограничением в 30 градусов
+      let rotateX = scrollTiltX + mouseTiltY;
+      let rotateY = mouseTiltX;
+
+      rotateX = Math.max(-30, Math.min(30, rotateX));
+      rotateY = Math.max(-30, Math.min(30, rotateY));
+
+      heroPhotoFrame.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      
+      requestAnimationFrame(updateTilt);
+    };
+
+    // Desktop: Движение мыши по всей секции Hero
+    heroSection.addEventListener('mousemove', (e) => {
+      if (window.innerWidth <= 900) return;
+      isInteract = true;
+      const rect = heroPhotoFrame.getBoundingClientRect();
+      // Центрируем координаты относительно фото (диапазон -1...1)
+      targetMouseX = (e.clientX - (rect.left + rect.width / 2)) / (rect.width / 2);
+      targetMouseY = (e.clientY - (rect.top + rect.height / 2)) / (rect.height / 2);
+    });
+
+    heroSection.addEventListener('mouseleave', () => {
+      isInteract = false;
+      targetMouseX = 0;
+      targetMouseY = 0;
+    });
+
+    // Mobile: Наклон по клику/тапу
+    heroSection.addEventListener('click', (e) => {
+      if (window.innerWidth > 900) return;
+      isInteract = true;
+      const rect = heroPhotoFrame.getBoundingClientRect();
+      targetMouseX = (e.clientX - (rect.left + rect.width / 2)) / (rect.width / 2);
+      targetMouseY = (e.clientY - (rect.top + rect.height / 2)) / (rect.height / 2);
+      
+      // Мягкий возврат через паузу
+      setTimeout(() => { isInteract = false; }, 1000);
+    });
+
+    requestAnimationFrame(updateTilt);
+  }
+
+  /* =========================================================
      КАРУСЕЛИ
   ========================================================= */
   let activeGalleryImages = [];
