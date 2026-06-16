@@ -297,14 +297,14 @@ input {
 }
 
 .details-lead {
-  font-size: clamp(30px, 1vw, 42px);
+  font-size: clamp(20px, 4vw, 42px);
   line-height: 0.98;
   font-weight: 400;
   margin: 0 0 28px;
 }
 
 .details-invite {
-  font-size: clamp(30px, 1vw, 42px);
+  font-size: clamp(20px, 4vw, 42px);
   line-height: 1;
   font-weight: 400;
   margin: 0 0 28px;
@@ -331,7 +331,7 @@ input {
 }
 
 .details-value {
-  font-size: clamp(30px, 1vw, 40px);
+  font-size: clamp(20px, 4vw, 40px);
   line-height: 0.98;
   font-weight: 400;
 }
@@ -420,7 +420,7 @@ input {
 
 .timing-text {
   font-family: var(--font-body);
-  font-size: clamp(30px, 1vw, 38px);
+  font-size: clamp(20px, 4vw, 38px);
   line-height: 0.98;
   font-weight: 400;
   letter-spacing: -0.05em;
@@ -671,7 +671,7 @@ input {
   max-width: 860px;
   margin: 0 auto;
   font-family: var(--font-body);
-  font-size: clamp(30px, 1vw, 34px);
+  font-size: clamp(18px, 3.5vw, 34px);
   line-height: 0.98;
   letter-spacing: -0.05em;
   color: var(--accent-red);
