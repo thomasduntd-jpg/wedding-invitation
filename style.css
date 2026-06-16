@@ -1121,7 +1121,7 @@ input {
   }
 
   .timing-oval {
-    width: min(80vw, 320px);
+    width: min(60vw, 320px);
     min-height: 720px;
     padding: 100px 24px 44px;
     border-width: 1.5px;
