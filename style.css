@@ -654,11 +654,14 @@ input {
 ========================================================= */
 #wishes {
   background: var(--bg-pink);
-  padding: 64px 0 0;
+  padding: 64px 0 0; /* Убран отступ снизу, чтобы фон заканчивался на фото */
+  overflow: visible; /* Разрешаем элементам выходить за пределы секции */
 }
 
 .wishes-inner {
   text-align: center;
+  position: relative; /* To ensure text is above generated flowers */
+  z-index: 3; /* Higher than generated flowers */
 }
 
 .wishes-title {
@@ -680,26 +683,40 @@ input {
 .wishes-decor-wrap {
   position: relative;
   width: 100%;
-  max-width: 430px;
-  margin: 36px auto -22px;
-  height: 210px;
+  max-width: 1000px; /* Увеличена ширина области для цветов */
+  margin: 200px auto 0; /* Removed negative margin */
+  height: 350px; /* Increased height for decorative elements container */
 }
 
 .wishes-square {
   position: absolute;
   left: 50%;
-  top: 56%;
-  width: 255px;
-  height: 122px;
+  top: 50%; /* Centered vertically within wishes-decor-wrap */
+  width: clamp(300px, 80vw, 700px); /* Исправлен и расширен размер прямоугольника */
+  height: clamp(150px, 40vw, 300px);
   border: 2px solid var(--accent-red);
   transform: translate(-50%, -50%) rotate(10deg);
 }
 
 .wishes-flowers {
-  position: relative;
+  position: absolute; /* Absolute positioning within wishes-decor-wrap */
   z-index: 2;
-  width: 170px;
-  margin: 0 auto;
+  width: clamp(200px, 60vw, 380px); /* Увеличено основное изображение цветов */
+  height: auto;
+  left: 50%;
+  bottom: 0; /* Aligns its bottom with the bottom of wishes-decor-wrap */
+  transform: translateX(-50%);
+  pointer-events: auto; /* Enable hover events on this image */
+}
+
+/* New CSS for generated flowers */
+.generated-flower {
+  position: absolute;
+  opacity: 0; /* Start invisible */
+  transition: opacity 0.5s ease-out, transform 2s linear; /* Smooth fade-in/out and movement */
+  pointer-events: none; /* Don't interfere with other interactions */
+  z-index: 10; /* Теперь на переднем плане перед всеми элементами декора */
+  transform: translate(0, 0) scale(1); /* Base for animation */
 }
 
 /* =========================================================

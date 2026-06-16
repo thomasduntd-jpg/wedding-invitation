@@ -119,6 +119,121 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   /* =========================================================
+     WISHES SECTION - FLOWER ANIMATION
+  ========================================================= */
+  const wishesFlowers = document.querySelector('.wishes-flowers');
+  const wishesDecorWrap = document.querySelector('.wishes-decor-wrap');
+  const wishesSection = document.getElementById('wishes');
+
+  if (wishesFlowers && wishesDecorWrap && wishesSection) {
+    const flowerImages = [
+      'images/fl-1.png',
+      'images/fl-2.png',
+      'images/fl-3.png',
+      'images/fl-4.png',
+      'images/fl-5.png',
+      'images/fl-6.png',
+      'images/fl-7.png',
+    ];
+
+    let generationInterval = null;
+    let generationTimeout = null;
+    const activeFlowers = new Set(); // To keep track of generated flowers
+    let isHovering = false; // Flag to track mouse hover state
+
+    const generateFlower = () => {
+      if (activeFlowers.size > 15) return; // Limit the number of flowers to avoid clutter
+
+      const flower = document.createElement('img');
+      flower.src = flowerImages[Math.floor(Math.random() * flowerImages.length)];
+      flower.className = 'generated-flower';
+      
+      // Random size between 40px and 80px
+      const size = Math.random() * 40 + 40;
+      flower.style.width = `${size}px`;
+      flower.style.height = 'auto'; // Maintain aspect ratio
+
+      // Random initial position within wishesDecorWrap
+      const wrapRect = wishesDecorWrap.getBoundingClientRect();
+      // Position relative to the wishesDecorWrap, considering its padding/border if any
+      const startX = Math.random() * (wrapRect.width - size);
+      const startY = Math.random() * (wrapRect.height - size);
+      
+      flower.style.left = `${startX}px`;
+      flower.style.top = `${startY}px`;
+
+      wishesDecorWrap.appendChild(flower);
+      activeFlowers.add(flower);
+
+      // Force reflow for transition to work
+      void flower.offsetWidth;
+
+      // Random target position for movement (relative to initial position)
+      const moveX = (Math.random() - 0.5) * 400; // Увеличен разлет по горизонтали
+      const moveY = (Math.random() - 0.5) * 250; // Увеличен разлет по вертикали
+      const scale = Math.random() * 0.4 + 0.8; // Scale between 0.8 and 1.2
+
+      flower.style.opacity = 1;
+      flower.style.transform = `translate(${moveX}px, ${moveY}px) scale(${scale})`;
+
+      // Fade out and remove after 2 seconds
+      setTimeout(() => {
+        flower.style.opacity = 0;
+        // Continue moving slightly while fading out
+        flower.style.transform = `translate(${moveX + (Math.random() - 0.5) * 30}px, ${moveY + (Math.random() - 0.5) * 30}px) scale(${scale * 0.7})`;
+        setTimeout(() => {
+          flower.remove();
+          activeFlowers.delete(flower);
+        }, 500); // CSS transition is 0.5s for opacity
+      }, 1500); // Start fading out after 1.5 seconds, total lifecycle 2s
+    };
+
+    const startFlowerAnimation = () => {
+      if (generationInterval) return; // Already running
+      generationInterval = setInterval(generateFlower, 200); // Generate a flower every 200ms
+      generationTimeout = setTimeout(() => {
+        clearInterval(generationInterval);
+        generationInterval = null;
+      }, 10000); // Stop generation after 10 seconds
+    };
+
+    const stopFlowerAnimation = () => {
+      clearInterval(generationInterval);
+      clearTimeout(generationTimeout);
+      generationInterval = null;
+      generationTimeout = null;
+
+      activeFlowers.forEach(flower => {
+        flower.style.opacity = 0;
+        flower.style.transform += ` scale(0.5)`; // Shrink slightly while fading
+        setTimeout(() => { flower.remove(); activeFlowers.delete(flower); }, 500);
+      });
+    };
+
+    wishesFlowers.addEventListener('mouseenter', () => {
+      isHovering = true;
+      startFlowerAnimation();
+    });
+    wishesFlowers.addEventListener('mouseleave', () => {
+      isHovering = false;
+      stopFlowerAnimation(); // Stop generation and fade out all flowers immediately
+    });
+
+    // Intersection Observer for section visibility
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) {
+          stopFlowerAnimation();
+        } else if (isHovering && !generationInterval) { // If section becomes visible and mouse is hovering, restart generation
+          startFlowerAnimation();
+        }
+      });
+    }, { threshold: 0.1 }); // Trigger when 10% of the section is visible
+
+    observer.observe(wishesSection);
+  }
+
+  /* =========================================================
      КАРУСЕЛИ
   ========================================================= */
   let activeGalleryImages = [];
