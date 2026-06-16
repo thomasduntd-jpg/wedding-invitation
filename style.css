@@ -1016,7 +1016,6 @@ input {
   .hero-name {
     position: static;
     transform: none;
-    margin-top: 18px;
   }
 
   .hero-composition {
