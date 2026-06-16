@@ -297,14 +297,14 @@ input {
 }
 
 .details-lead {
-  font-size: clamp(20px, 4vw, 42px);
+  font-size: clamp(20px, 2vw, 42px);
   line-height: 0.98;
   font-weight: 400;
   margin: 0 0 28px;
 }
 
 .details-invite {
-  font-size: clamp(20px, 4vw, 42px);
+  font-size: clamp(20px, 2vw, 42px);
   line-height: 1;
   font-weight: 400;
   margin: 0 0 28px;
@@ -331,7 +331,7 @@ input {
 }
 
 .details-value {
-  font-size: clamp(20px, 4vw, 40px);
+  font-size: clamp(20px, 2vw, 40px);
   line-height: 0.98;
   font-weight: 400;
 }
@@ -410,7 +410,7 @@ input {
 
 .timing-time {
   font-family: var(--font-body);
-  font-size: clamp(21px, 1vw, 28px);
+  font-size: clamp(20px, 1vw, 28px);
   line-height: 1;
   font-weight: 700;
   letter-spacing: -0.05em;
@@ -420,7 +420,7 @@ input {
 
 .timing-text {
   font-family: var(--font-body);
-  font-size: clamp(20px, 4vw, 38px);
+  font-size: clamp(20px, 2vw, 38px);
   line-height: 0.98;
   font-weight: 400;
   letter-spacing: -0.05em;
@@ -509,8 +509,8 @@ input {
   height: 42px;
   border: none;
   border-radius: 50%;
-  background: rgba(243, 230, 225, 0.88);
-  color: var(--text-dark);
+  background: var(--text-dark);
+  color: #fff;
   cursor: pointer;
   z-index: 5;
 }
@@ -609,12 +609,12 @@ input {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 48px;
-  height: 48px;
+  width: 42px;
+  height: 42px;
   border: none;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.14);
-  color: white;
+  background: var(--text-dark);
+  color: #fff;
   cursor: pointer;
 }
 
@@ -671,7 +671,7 @@ input {
   max-width: 860px;
   margin: 0 auto;
   font-family: var(--font-body);
-  font-size: clamp(18px, 3.5vw, 34px);
+  font-size: clamp(20px, 2vw, 34px);
   line-height: 0.98;
   letter-spacing: -0.05em;
   color: var(--accent-red);
@@ -1109,13 +1109,21 @@ input {
     height: 320px;
   }
 
+  .dresscode-palette {
+    display: grid;
+    grid-template-columns: repeat(4, 42px);
+    justify-content: center;
+    gap: 12px;
+  }
+
   .timing-card {
     margin-top: -90px;
   }
 
   .timing-oval {
-    min-height: auto;
-    padding: 36px 24px 44px;
+    width: min(80vw, 320px);
+    min-height: 720px;
+    padding: 100px 24px 44px;
     border-width: 1.5px;
   }
 
