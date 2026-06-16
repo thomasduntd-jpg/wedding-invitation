@@ -2,340 +2,323 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Николай & Анастасия — 19.09.2026</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <!-- Декоративные лучи света на фоне -->
-  <div class="scroll-gradient-background">
-    <div class="gradient-ray ray-1"></div>
-    <div class="gradient-ray ray-2"></div>
-    <div class="gradient-ray ray-3"></div>
-    <div class="gradient-ray ray-4"></div>
-    <div class="gradient-ray ray-5"></div>
-    <div class="gradient-ray ray-6"></div>
-    <div class="noise-overlay"></div>
-  </div>
-
-  <!-- ========================================
-       HEADER
-  ======================================== -->
   <header id="main-header">
     <nav class="header-nav">
-      <!-- Левые ссылки -->
       <div class="nav-group nav-group-left">
-        <a href="#timing"    class="nav-link">Тайминг</a>
-        <a href="#dresscode" class="nav-link">Дресс-код</a>
+        <a href="#timing" class="nav-link">ТАЙМИНГ</a>
+        <a href="#dresscode" class="nav-link">ДРЕСС-КОД</a>
       </div>
 
-      <!-- Логотип по центру -->
-      <div class="header-logo-wrap" id="header-logo-wrap">
-        <a href="#hero">
-          <img src="logo.svg" alt="Николай & Анастасия" class="header-logo" id="header-logo"/>
+      <div class="header-logo-wrap">
+        <a href="#hero" class="header-logo-link">
+          <img src="logo.svg" alt="Николай и Анастасия" class="header-logo" />
         </a>
       </div>
 
-      <!-- Правые ссылки -->
       <div class="nav-group nav-group-right">
-        <a href="#wishes" class="nav-link">Пожелания</a>
-        <a href="#form"   class="nav-link">Анкета</a>
+        <a href="#wishes" class="nav-link">ПОЖЕЛАНИЯ</a>
+        <a href="#form" class="nav-link">АНКЕТА</a>
       </div>
     </nav>
   </header>
 
-  <!-- ========================================
-       HERO
-  ======================================== -->
-  <section id="hero">
+  <main>
 
-    <!-- Фон -->
-    <div class="hero-bg">
-      <img src="images/hero-bg.jpg" alt="" class="hero-bg-img"/>
-      <div class="hero-overlay"></div>
-    </div>
+    <section id="hero">
+      <div class="hero-inner">
+        <h1 class="hero-title">МЫ ЖЕНИМСЯ!</h1>
 
-    <!-- Большое белое лого -->
-    <div class="hero-logo-wrap">
-      <img src="logo.svg" alt="Николай & Анастасия" class="hero-logo"/>
-    </div>
+        <div class="hero-composition">
+          <div class="hero-line hero-line-vertical"></div>
+          <div class="hero-line hero-line-horizontal"></div>
 
-    <!-- 
-      ОБЁРТКА: decoration (фон) + couple-photo (перед)
-      decoration абсолютно позиционирован ВНУТРИ этой обёртки
-    -->
-    <div class="hero-photo-group">
+          <div class="hero-name hero-name-left">НИКОЛАЙ</div>
 
-      <!-- Сменяющийся PNG — за фото (z-index ниже) -->
-      <div class="decoration-wrap">
-        <img src="images/decoration-1.png" alt="" class="decoration-img" id="decoration-img"/>
-      </div>
-
-      <!-- Фото пары — на переднем плане -->
-      <div class="photo-3d-container" id="photo-stack">
-        <div class="photo-3d-wrapper" data-index="0">
-          <img src="images/couple-photo-1.jpg" alt="Николай и Анастасия 1" class="photo-3d"/>
-        </div>
-        <div class="photo-3d-wrapper" data-index="1">
-          <img src="images/couple-photo-2.jpg" alt="Николай и Анастасия 2" class="photo-3d"/>
-        </div>
-        <div class="photo-3d-wrapper" data-index="2">
-          <img src="images/couple-photo-3.jpg" alt="Николай и Анастасия 3" class="photo-3d"/>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Текст приглашения -->
-    <div class="hero-text">
-      <p>
-        Дорогие друзья и близкие!<br/>
-        Наш особенный день уже скоро<br/>
-        и мы с радостью приглашаем Вас<br/>
-        разделить его вместе c нами!
-      </p>
-    </div>
-
-  </section>
-
-  <!-- ========================================
-       DETAILS SECTION
-  ======================================== -->
-  <section id="details">
-    <h2 class="section-title-serif">МЫ ЖДЁМ ВАС!</h2>
-    <div class="details-content">
-      <p>
-        <strong>Дата</strong><br/>
-        19 сентября 2026
-      </p>
-      <p>
-        <strong>Время</strong><br/>
-        Cбор гостей в 15:30
-      </p>
-      <p>
-        <strong>Место</strong><br/>
-        <a
-          href="https://yandex.ru/maps/-/CPxmy4kK"
-          target="_blank"
-          rel="noopener noreferrer"
-        >Оранжерея, Набережная реки Фонтанки, 118Д</a>
-      </p>
-    </div>
-  </section>
-
-
-
-  <!-- ========================================
-       ТАЙМИНГ
-  ======================================== -->
-  <section id="timing">
-    <h2 class="section-title-display">ТАЙМИНГ</h2>
-    <div class="timing-container">
-      <div class="timing-list">
-        <div class="timing-item">
-          <div class="timing-time">15:30–16:00</div>
-          <div class="timing-text">Сбор гостей</div>
-        </div>
-        <div class="timing-item">
-          <div class="timing-time">16:00–17:00</div>
-          <div class="timing-text">Выездная церемония</div>
-        </div>
-        <div class="timing-item">
-          <div class="timing-time">17:00–21:00</div>
-          <div class="timing-text">Основная программа и банкет</div>
-        </div>
-        <div class="timing-item">
-          <div class="timing-time">21:00</div>
-          <div class="timing-text">Торт</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ========================================
-       ДРЕСС-КОД
-  ======================================== -->
-  <section id="dresscode">
-    <h2 class="section-title-display">ДРЕСС-КОД</h2>
-    <div class="dresscode-layout">
-      <div class="dresscode-left">
-        <h3 class="dresscode-label">Женский</h3>
-        <div class="carousel" id="carousel-left">
-          <div class="carousel-track" id="carousel-track-left">
-            <div class="carousel-slide"><img src="images/dcl-1.jpg" alt="Образ 1"/></div>
-            <div class="carousel-slide"><img src="images/dcl-2.jpg" alt="Образ 2"/></div>
-            <div class="carousel-slide"><img src="images/dcl-3.jpg" alt="Образ 3"/></div>
-            <div class="carousel-slide"><img src="images/dcl-4.jpg" alt="Образ 4"/></div>
-            <div class="carousel-slide"><img src="images/dcl-5.jpg" alt="Образ 5"/></div>
-            <div class="carousel-slide"><img src="images/dcl-6.jpg" alt="Образ 6"/></div>
-            <div class="carousel-slide"><img src="images/dcl-7.jpg" alt="Образ 7"/></div>
-            <div class="carousel-slide"><img src="images/dcl-8.jpg" alt="Образ 8"/></div>
-            <div class="carousel-slide"><img src="images/dcl-9.jpg" alt="Образ 9"/></div>
-            <div class="carousel-slide"><img src="images/dcl-10.jpg" alt="Образ 10"/></div>
-            <div class="carousel-slide"><img src="images/dcl-11.jpg" alt="Образ 11"/></div>
-            <div class="carousel-slide"><img src="images/dcl-12.jpg" alt="Образ 12"/></div>
+          <div class="hero-photo-frame">
+            <img src="images/coup.png" alt="Николай и Анастасия" class="hero-photo" />
           </div>
-          <button class="carousel-btn carousel-btn-prev" id="carousel-prev-left" aria-label="Назад">&#8592;</button>
-          <button class="carousel-btn carousel-btn-next" id="carousel-next-left" aria-label="Вперёд">&#8594;</button>
-          <div class="carousel-dots" id="carousel-dots-left"></div>
+
+          <div class="hero-name hero-name-right">АНАСТАСИЯ</div>
         </div>
-      </div>
 
-      <div class="dresscode-palette">
-        <div class="palette-item" style="background-color: #eea9ba;" title="Нежный розовый"></div>
-        <div class="palette-item" style="background-color: #bed18a;" title="Нежный зеленый"></div>
-        <div class="palette-item" style="background-color: #E8E0D5;" title="Бежевый"></div>
-        <div class="palette-item" style="background-color: #D9D9D9;" title="Светло серый"></div>
-        <div class="palette-item" style="background-color: #1E5945;" title="Зеленый изумрудный"></div>
-        <div class="palette-item" style="background-color: #800020;" title="Бордовый"></div>
-        <div class="palette-item" style="background-color: #513229;" title="Богатый коричневый"></div>
-        <div class="palette-item" style="background-color: #1e1e1e;" title="Угольный"></div>
+        <div class="hero-date">19.09.2026</div>
       </div>
+    </section>
 
-      <div class="dresscode-right">
-        <h3 class="dresscode-label">Мужской</h3>
-        <div class="carousel" id="carousel-right">
-          <div class="carousel-track" id="carousel-track-right">
-            <div class="carousel-slide"><img src="images/dcr-1.jpg" alt="Образ 1"/></div>
-            <div class="carousel-slide"><img src="images/dcr-2.jpg" alt="Образ 2"/></div>
-            <div class="carousel-slide"><img src="images/dcr-3.jpg" alt="Образ 3"/></div>
-            <div class="carousel-slide"><img src="images/dcr-4.jpg" alt="Образ 4"/></div>
-            <div class="carousel-slide"><img src="images/dcr-5.jpg" alt="Образ 5"/></div>
-            <div class="carousel-slide"><img src="images/dcr-6.jpg" alt="Образ 6"/></div>
-            <div class="carousel-slide"><img src="images/dcr-7.jpg" alt="Образ 7"/></div>
-            <div class="carousel-slide"><img src="images/dcr-8.jpg" alt="Образ 8"/></div>
-            <div class="carousel-slide"><img src="images/dcr-9.jpg" alt="Образ 9"/></div>
-            <div class="carousel-slide"><img src="images/dcr-10.jpg" alt="Образ 10"/></div>
-            <div class="carousel-slide"><img src="images/dcr-11.jpg" alt="Образ 11"/></div>
-            <div class="carousel-slide"><img src="images/dcr-12.jpg" alt="Образ 12"/></div>
+    <section id="details">
+      <div class="container narrow">
+        <h2 class="section-title details-title">Дорогие друзья и близкие!</h2>
+
+        <div class="details-text">
+          <p class="details-lead">
+            Наш особенный день уже скоро<br />
+            и мы с радостью приглашаем вас<br />
+            разделить его вместе с нами!
+          </p>
+
+          <p class="details-invite">Ждем вас:</p>
+
+          <div class="details-info">
+            <div class="details-item">
+              <div class="details-label">Дата</div>
+              <div class="details-value">19 сентября 2026</div>
+            </div>
+
+            <div class="details-item">
+              <div class="details-label">Время</div>
+              <div class="details-value">Сбор гостей в 15:30</div>
+            </div>
+
+            <div class="details-item">
+              <div class="details-label">Место</div>
+              <div class="details-value">
+                <a
+                  href="https://yandex.ru/maps/-/CHV6mW9F"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Оранжерея, Набережная<br />
+                  реки Фонтанки, 118Д
+                </a>
+              </div>
+            </div>
           </div>
-          <button class="carousel-btn carousel-btn-prev" id="carousel-prev-right" aria-label="Назад">&#8592;</button>
-          <button class="carousel-btn carousel-btn-next" id="carousel-next-right" aria-label="Вперёд">&#8594;</button>
-          <div class="carousel-dots" id="carousel-dots-right"></div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Лайтбокс -->
-  <div class="lightbox-overlay" id="lightbox-overlay"></div>
-  <div class="lightbox" id="lightbox">
-    <button class="lightbox-close" id="lightbox-close">&times;</button>
-    <button class="lightbox-btn lightbox-prev" id="lightbox-prev">&#8592;</button>
-    <div class="lightbox-img-wrap">
-      <img src="" alt="" class="lightbox-main-img" id="lightbox-main-img"/>
-    </div>
-    <button class="lightbox-btn lightbox-next" id="lightbox-next">&#8594;</button>
-    <div class="lightbox-thumbnails" id="lightbox-thumbnails"></div>
-  </div>
-
-  <!-- ========================================
-       ПОЖЕЛАНИЯ
-  ======================================== -->
-  <section id="wishes">
-    <h2 class="section-title-display">ПОЖЕЛАНИЯ</h2>
-    <div class="wishes-content">
-      <p class="wishes-text">Вместо букетов мы очень просим принести на праздник один цветок, который ассоциируется у вас с невестой — по цвету, характеру или аромату. Из этих цветов мы соберём букет невесты. Пожалуйста, без упаковки — важна ваша интуиция и тепло</p>
-      <div class="wishes-flowers-wrap">
-        <img src="images/flowers.png" alt="Цветы" class="wishes-flowers"/>
+    <section id="timing">
+      <div class="timing-photo-wrap">
+        <img src="images/timing-photo.jpg" alt="Локация" class="timing-photo" />
+        <div class="timing-photo-overlay"></div>
       </div>
-    </div>
-  </section>
+      
+      <div class="timing-card">
+        <div class="timing-bg">
+        <div class="timing-oval">
+          <h2 class="section-title timing-title">ТАЙМИНГ</h2>
 
-  
-  <!-- ========================================
-       АНКЕТА
-  ======================================== -->
-  <section id="form">
-    <h2 class="section-title-display">АНКЕТА</h2>
-    <form class="survey-form" id="survey-form" novalidate>
+          <div class="timing-list">
+            <div class="timing-item">
+              <div class="timing-time">15:30–16:00</div>
+              <div class="timing-text">Сбор гостей</div>
+            </div>
 
-      <div class="form-field">
-        <input
-          type="text"
-          id="full-name"
-          name="fullName"
-          placeholder="Имя Фамилия"
-          class="form-input"
-          autocomplete="name"
-        />
-      </div>
+            <div class="timing-item">
+              <div class="timing-time">16:00–17:00</div>
+              <div class="timing-text">Выездная церемония</div>
+            </div>
 
-      <div class="form-field">
-        <p class="form-question">Сможете ли вы прийти?</p>
-        <div class="form-radio-group">
-          <label class="form-radio-label">
-            <input type="radio" name="attendance" value="yes" class="form-radio"/>
-            <span class="form-radio-custom"></span>
-            Да, смогу
-          </label>
-          <label class="form-radio-label">
-            <input type="radio" name="attendance" value="no" class="form-radio"/>
-            <span class="form-radio-custom"></span>
-            К сожалению, нет
-          </label>
+            <div class="timing-item">
+              <div class="timing-time">17:00–21:00</div>
+              <div class="timing-text">Основная программа<br />и банкет</div>
+            </div>
+
+            <div class="timing-item">
+              <div class="timing-time">21:00</div>
+              <div class="timing-text">Торт</div>
+            </div>
+          </div>
+        </div>
         </div>
       </div>
+    </section>
 
-      <button type="submit" class="form-submit-btn" id="submit-btn">
-        Отправить
-      </button>
+    <section id="dresscode">
+      <div class="container">
+        <h2 class="section-title dresscode-title">ДРЕСС-КОД</h2>
 
-      <div class="form-message form-success" id="form-success">
-        ✓ Спасибо! Ваш ответ получен.
-      </div>
-      <div class="form-message form-error" id="form-error">
-        Произошла ошибка. Пожалуйста, попробуйте ещё раз.
-      </div>
+        <div class="dresscode-palette">
+          <div class="palette-item" style="background:#E8B4BE;"></div>
+          <div class="palette-item" style="background:#8A9760;"></div>
+          <div class="palette-item palette-item-bordered" style="background:#EFE3DE;"></div>
+          <div class="palette-item palette-item-bordered" style="background:#B9B5B2;"></div>
+          <div class="palette-item" style="background:#2C6B54;"></div>
+          <div class="palette-item" style="background:#8D0B45;"></div>
+          <div class="palette-item" style="background:#793728;"></div>
+          <div class="palette-item" style="background:#18191E;"></div>
+        </div>
 
-    </form>
-  </section>
+        <div class="dresscode-layout">
+          <div class="dresscode-column">
+            <div class="carousel" id="carousel-left">
+              <div class="carousel-track">
+                <div class="carousel-slide"><img src="images/dcl-1.jpg" alt="Женский образ 1" /></div>
+                <div class="carousel-slide"><img src="images/dcl-2.jpg" alt="Женский образ 2" /></div>
+                <div class="carousel-slide"><img src="images/dcl-3.jpg" alt="Женский образ 3" /></div>
+                <div class="carousel-slide"><img src="images/dcl-4.jpg" alt="Женский образ 4" /></div>
+                <div class="carousel-slide"><img src="images/dcl-5.jpg" alt="Женский образ 5" /></div>
+                <div class="carousel-slide"><img src="images/dcl-6.jpg" alt="Женский образ 6" /></div>
+                <div class="carousel-slide"><img src="images/dcl-7.jpg" alt="Женский образ 7" /></div>
+                <div class="carousel-slide"><img src="images/dcl-8.jpg" alt="Женский образ 8" /></div>
+                <div class="carousel-slide"><img src="images/dcl-9.jpg" alt="Женский образ 9" /></div>
+                <div class="carousel-slide"><img src="images/dcl-10.jpg" alt="Женский образ 10" /></div>
+                <div class="carousel-slide"><img src="images/dcl-11.jpg" alt="Женский образ 11" /></div>
+                <div class="carousel-slide"><img src="images/dcl-12.jpg" alt="Женский образ 12" /></div>
+              </div>
+              <button class="carousel-btn carousel-btn-prev" aria-label="Назад">&#8592;</button>
+              <button class="carousel-btn carousel-btn-next" aria-label="Вперёд">&#8594;</button>
+              <div class="carousel-dots"></div>
+            </div>
+          </div>
 
-  <!-- ========================================
-       АДРЕС
-  ======================================== -->
-  <section id="address">
-    <h2 class="section-title-display">АДРЕС</h2>
-    <div style="position:relative;overflow:hidden;"><a href="https://yandex.ru/maps/org/oranzhereya/66445917254/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;">Оранжерея</a><a href="https://yandex.ru/maps/2/saint-petersburg/category/cafe/184106390/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:14px;">Кафе в Санкт‑Петербурге</a><a href="https://yandex.ru/maps/2/saint-petersburg/category/banquet_hall/184108315/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:28px;">Банкетный зал в Санкт‑Петербурге</a><iframe src="https://yandex.ru/map-widget/v1/?ll=30.311937%2C59.919144&mode=search&oid=66445917254&ol=biz&z=17.81" width=100%
-     height="400" frameborder="1" allowfullscreen="true" style="position:relative;"></iframe></div>
-  </section>
+          <div class="dresscode-column">
+            <div class="carousel" id="carousel-right">
+              <div class="carousel-track">
+                <div class="carousel-slide"><img src="images/dcr-1.jpg" alt="Мужской образ 1" /></div>
+                <div class="carousel-slide"><img src="images/dcr-2.jpg" alt="Мужской образ 2" /></div>
+                <div class="carousel-slide"><img src="images/dcr-3.jpg" alt="Мужской образ 3" /></div>
+                <div class="carousel-slide"><img src="images/dcr-4.jpg" alt="Мужской образ 4" /></div>
+                <div class="carousel-slide"><img src="images/dcr-5.jpg" alt="Мужской образ 5" /></div>
+                <div class="carousel-slide"><img src="images/dcr-6.jpg" alt="Мужской образ 6" /></div>
+                <div class="carousel-slide"><img src="images/dcr-7.jpg" alt="Мужской образ 7" /></div>
+                <div class="carousel-slide"><img src="images/dcr-8.jpg" alt="Мужской образ 8" /></div>
+                <div class="carousel-slide"><img src="images/dcr-9.jpg" alt="Мужской образ 9" /></div>
+                <div class="carousel-slide"><img src="images/dcr-10.jpg" alt="Мужской образ 10" /></div>
+                <div class="carousel-slide"><img src="images/dcr-11.jpg" alt="Мужской образ 11" /></div>
+                <div class="carousel-slide"><img src="images/dcr-12.jpg" alt="Мужской образ 12" /></div>
+              </div>
+              <button class="carousel-btn carousel-btn-prev" aria-label="Назад">&#8592;</button>
+              <button class="carousel-btn carousel-btn-next" aria-label="Вперёд">&#8594;</button>
+              <div class="carousel-dots"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <!-- ========================================
-       ТАЙМЕР — после анкеты ✅
-  ======================================== -->
-  <section id="timer">
-    <h2 class="section-title-serif">ДО НАЧАЛА ТОРЖЕСТВА<br/>ОСТАЛОСЬ:</h2>
-    <div class="timer-blocks" id="timer-display">
-      <div class="timer-block">
-        <span class="timer-num" id="t-days">000</span>
-        <span class="timer-label">дней</span>
+    <div class="lightbox-overlay" id="lightbox-overlay"></div>
+    <div class="lightbox" id="lightbox">
+      <button class="lightbox-close" id="lightbox-close">&times;</button>
+      <button class="lightbox-btn lightbox-prev" id="lightbox-prev">&#8592;</button>
+      <div class="lightbox-img-wrap">
+        <img src="" alt="" class="lightbox-main-img" id="lightbox-main-img" />
       </div>
-      <div class="timer-sep">:</div>
-      <div class="timer-block">
-        <span class="timer-num" id="t-hours">00</span>
-        <span class="timer-label">часов</span>
-      </div>
-      <div class="timer-sep">:</div>
-      <div class="timer-block">
-        <span class="timer-num" id="t-minutes">00</span>
-        <span class="timer-label">минут</span>
-      </div>
-      <div class="timer-sep">:</div>
-      <div class="timer-block">
-        <span class="timer-num" id="t-seconds">00</span>
-        <span class="timer-label">секунд</span>
-      </div>
+      <button class="lightbox-btn lightbox-next" id="lightbox-next">&#8594;</button>
+      <div class="lightbox-thumbnails" id="lightbox-thumbnails"></div>
     </div>
-  </section>
 
-  <!-- ========================================
-       FOOTER
-  ======================================== -->
+    <section id="wishes">
+      <div class="container narrow wishes-inner">
+        <h2 class="section-title wishes-title">ПОЖЕЛАНИЯ</h2>
+
+        <p class="wishes-text">
+          Вместо букетов мы очень просим принести на праздник<br />
+          один цветок, который ассоциируется у вас с невестой — по цвету,<br />
+          характеру или аромату. Из этих цветов мы соберём букет невесты.<br />
+          Пожалуйста, без упаковки — важна ваша интуиция и тепло
+        </p>
+
+        <div class="wishes-decor-wrap">
+          <div class="wishes-square"></div>
+          <img src="images/flowers.png" alt="Цветы" class="wishes-flowers" />
+        </div>
+      </div>
+    </section>
+
+    <section id="form">
+      <div class="container form-container">
+        <h2 class="section-title form-title">АНКЕТА</h2>
+
+        <form class="survey-form" id="survey-form" novalidate>
+          <div class="form-field">
+            <input
+              type="text"
+              id="full-name"
+              name="fullName"
+              placeholder="Имя Фамилия"
+              class="form-input"
+              autocomplete="name"
+            />
+          </div>
+
+          <div class="form-field">
+            <p class="form-question">Сможете ли вы прийти?</p>
+            <div class="form-radio-group">
+              <label class="form-radio-label">
+                <input type="radio" name="attendance" value="yes" class="form-radio" />
+                <span class="form-radio-custom"></span>
+                Да, смогу
+              </label>
+
+              <label class="form-radio-label">
+                <input type="radio" name="attendance" value="no" class="form-radio" />
+                <span class="form-radio-custom"></span>
+                Не смогу
+              </label>
+            </div>
+          </div>
+
+          <button type="submit" class="form-submit-btn" id="submit-btn">Отправить</button>
+
+          <div class="form-message form-success" id="form-success">
+            ✓ Спасибо! Ваш ответ получен.
+          </div>
+
+          <div class="form-message form-error" id="form-error">
+            Произошла ошибка. Пожалуйста, попробуйте ещё раз.
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section id="address">
+      <h2 class="section-title address-title">АДРЕС</h2>
+      <div class="map-container">
+        <iframe
+          src="https://yandex.ru/map-widget/v1/?ll=30.311937%2C59.919144&mode=search&oid=66445917254&ol=biz&z=17.81"
+          allowfullscreen="true"
+          loading="lazy">
+        </iframe>
+      </div>
+    </section>
+
+    <section id="timer">
+      <div class="container narrow">
+        <h2 class="section-title timer-title">ДО НАЧАЛА ТОРЖЕСТВА<br />ОСТАЛОСЬ:</h2>
+
+        <div class="timer-blocks" id="timer-display">
+          <div class="timer-block">
+            <span class="timer-num" id="t-days">000</span>
+            <span class="timer-label">дней</span>
+          </div>
+
+          <div class="timer-sep">:</div>
+
+          <div class="timer-block">
+            <span class="timer-num" id="t-hours">00</span>
+            <span class="timer-label">часов</span>
+          </div>
+
+          <div class="timer-sep">:</div>
+
+          <div class="timer-block">
+            <span class="timer-num" id="t-minutes">00</span>
+            <span class="timer-label">минут</span>
+          </div>
+
+          <div class="timer-sep">:</div>
+
+          <div class="timer-block">
+            <span class="timer-num" id="t-seconds">00</span>
+            <span class="timer-label">секунд</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
   <footer class="site-footer">
     <p>Николай &amp; Анастасия · 19.09.2026</p>
   </footer>
