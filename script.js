@@ -51,6 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let currentMouseX = 0;
     let currentMouseY = 0;
     let isInteract = false;
+    let inactivityTimer;
 
     const updateTilt = () => {
       // 1. Расчет наклона при скролле (от 0 до 1 высоты экрана)
@@ -87,10 +88,26 @@ document.addEventListener('DOMContentLoaded', function () {
       requestAnimationFrame(updateTilt);
     };
 
+    const resetInactivityTimer = () => {
+      clearTimeout(inactivityTimer);
+      heroPhotoFrame.classList.remove('shine-effect'); // Keep removing from frame for compatibility
+      inactivityTimer = setTimeout(() => {
+        heroPhotoFrame.classList.add('shine-effect');
+      }, 3000);
+    };
+
+    heroPhotoFrame.addEventListener('animationend', (e) => { // Listen on the frame
+      if (e.animationName === 'shine') {
+        heroPhotoFrame.classList.remove('shine-effect'); // Remove from frame
+        resetInactivityTimer(); // Restart timer after shine ends
+      }
+    });
+
     // Desktop: Движение мыши по всей секции Hero
     heroSection.addEventListener('mousemove', (e) => {
       if (window.innerWidth <= 900) return;
       isInteract = true;
+      resetInactivityTimer();
       const rect = heroPhotoFrame.getBoundingClientRect();
       // Центрируем координаты относительно фото (диапазон -1...1)
       targetMouseX = (e.clientX - (rect.left + rect.width / 2)) / (rect.width / 2);
@@ -101,12 +118,14 @@ document.addEventListener('DOMContentLoaded', function () {
       isInteract = false;
       targetMouseX = 0;
       targetMouseY = 0;
+      resetInactivityTimer();
     });
 
     // Mobile: Наклон по клику/тапу
     heroSection.addEventListener('click', (e) => {
       if (window.innerWidth > 900) return;
       isInteract = true;
+      resetInactivityTimer();
       const rect = heroPhotoFrame.getBoundingClientRect();
       targetMouseX = (e.clientX - (rect.left + rect.width / 2)) / (rect.width / 2);
       targetMouseY = (e.clientY - (rect.top + rect.height / 2)) / (rect.height / 2);
@@ -116,6 +135,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     requestAnimationFrame(updateTilt);
+    resetInactivityTimer(); // Initial timer start
   }
 
   /* =========================================================

@@ -232,6 +232,12 @@ input {
   transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
+@keyframes shine {
+  100% {
+    left: 150%;
+  }
+}
+
 .generated-ht {
   position: absolute;
   opacity: 0;
@@ -245,6 +251,27 @@ input {
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
+  position: relative; /* Required for pseudo-element positioning */
+  overflow: hidden; /* To contain the shine effect */
+}
+
+.shine-effect .hero-photo::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.45) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-25deg);
+  animation: shine 1.5s ease-in-out forwards;
+  /* Ensure the shine is above the image but within its container */
+  z-index: 1;
 }
 
 .hero-name {
