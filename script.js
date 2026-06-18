@@ -83,24 +83,24 @@ document.addEventListener('DOMContentLoaded', function () {
       rotateX = Math.max(-30, Math.min(30, rotateX));
       rotateY = Math.max(-30, Math.min(30, rotateY));
 
-      heroPhotoFrame.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      const transformValue = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      heroPhotoFrame.style.setProperty('--current-transform', transformValue);
+      heroPhotoFrame.style.transform = transformValue;
       
       requestAnimationFrame(updateTilt);
     };
 
     const resetInactivityTimer = () => {
       clearTimeout(inactivityTimer);
-      heroPhotoFrame.classList.remove('shine-effect'); // Keep removing from frame for compatibility
+      heroPhotoFrame.classList.remove('heartbeat-effect');
+      heroPhotoFrame.style.animation = ''; // Сброс анимации
       inactivityTimer = setTimeout(() => {
-        heroPhotoFrame.classList.add('shine-effect');
+        heroPhotoFrame.classList.add('heartbeat-effect');
       }, 3000);
     };
 
-    heroPhotoFrame.addEventListener('animationend', (e) => { // Listen on the frame
-      if (e.animationName === 'shine') {
-        heroPhotoFrame.classList.remove('shine-effect'); // Remove from frame
-        resetInactivityTimer(); // Restart timer after shine ends
-      }
+    heroPhotoFrame.addEventListener('animationend', (e) => {
+      // Этот блок можно оставить пустым или удалить, если нет других анимаций для отслеживания
     });
 
     // Desktop: Движение мыши по всей секции Hero
