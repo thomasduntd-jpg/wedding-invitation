@@ -948,9 +948,24 @@ input {
 }
 
 .map-container {
+  position: relative;
   width: 100%;
   height: 450px;
   overflow: hidden;
+}
+
+.map-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+}
+
+.map-container.active::after {
+  display: none;
 }
 
 .map-container iframe {
@@ -1203,7 +1218,7 @@ input {
   }
 
   .carousel {
-    height: 470px;
+    height: 560px;
   }
 
   .wishes-decor-wrap {
@@ -1259,4 +1274,44 @@ input {
   .lightbox-next {
     right: 8px;
   }
+}
+
+/* =========================================================
+   PRELOADER
+========================================================= */
+.preloader {
+  position: fixed;
+  inset: 0;
+  background-color: var(--green);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+}
+
+.preloader.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.preloader-content {
+  text-align: center;
+}
+
+.preloader-logo {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+  /* Делаем логотип белым */
+  filter: brightness(0) invert(1);
+}
+
+.preloader-date {
+  margin-top: 16px;
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: -0.05em;
+  color: var(--white-soft);
 }

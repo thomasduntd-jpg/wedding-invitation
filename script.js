@@ -1,5 +1,36 @@
 document.addEventListener('DOMContentLoaded', function () {
   /* =========================================================
+     PRELOADER
+  ========================================================= */
+  (function() {
+    const preloader = document.createElement('div');
+    preloader.className = 'preloader';
+    preloader.id = 'preloader';
+
+    const content = document.createElement('div');
+    content.className = 'preloader-content';
+
+    const logo = document.createElement('img');
+    logo.src = 'logo.svg'; // Убедитесь, что путь к логотипу верный
+    logo.alt = 'Logo';
+    logo.className = 'preloader-logo';
+
+    const date = document.createElement('p');
+    date.className = 'preloader-date';
+    date.textContent = '19.09.26';
+
+    content.appendChild(logo);
+    content.appendChild(date);
+    preloader.appendChild(content);
+    document.body.prepend(preloader);
+
+    setTimeout(() => {
+      preloader.classList.add('hidden');
+      preloader.addEventListener('transitionend', () => preloader.remove());
+    }, 1500);
+  })();
+
+  /* =========================================================
      ТАЙМЕР
   ========================================================= */
   const targetDate = new Date('2026-09-19T15:30:00');
@@ -629,5 +660,17 @@ document.addEventListener('DOMContentLoaded', function () {
           if (formError) formError.classList.add('visible');
         });
     });
+  }
+
+  /* =========================================================
+     ИНТЕРАКТИВНАЯ КАРТА
+  ========================================================= */
+  const mapContainer = document.querySelector('.map-container');
+  if (mapContainer) {
+    mapContainer.addEventListener('click', function () {
+      if (!this.classList.contains('active')) {
+        this.classList.add('active');
+      }
+    }, { once: true });
   }
 });
